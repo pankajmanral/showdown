@@ -1,0 +1,84 @@
+{% load static tailwind_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Django Tailwind</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<!-- Google fonts link -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+		<!-- remix icon cdn -->
+		<link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+		{% tailwind_css %}
+	</head>
+
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Raleway', serif;
+		}
+		html,body{
+			height: 100%;
+			width: 100%;
+		}
+		#banner{
+        	background-image: url("{% static 'D:\Pankaj CLG\showdown\main\static\img\banner.png' %}");
+    	}	
+	</style>
+
+	<body>
+		
+		<nav class="h-40 w-full sticky inset-0 bg-white z-10">
+			<p class="h-10 py-2 text-center">Welcome to {site_name}</p>
+			<hr>
+			<nav class="h-28 w-full flex items-center justify-between px-1 lg:px-40">
+				<ul>
+					<button id="toggleBtn" class="w-20 h-28 lg:hidden">
+						<i class="ri-menu-line text-xl"></i>
+					</button>
+					<ul class="hidden lg:flex w-52 justify-around">
+						<li class="cursor-pointer">Shop</li>
+						<li class="cursor-pointer">Shop</li>
+						<li class="cursor-pointer">Shop</li>
+					</ul>
+				</ul>
+				<div>
+					<img class="h-20" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\logo.png' %}" alt="">
+				</div>
+				<ul class="flex w-20 lg:w-52 justify-evenly items-center">
+					<li class="cursor-pointer text-xl"><i class="ri-search-line"></i></li>
+					<li class="cursor-pointer text-xl"><i class="ri-handbag-line"></i></li>
+					<li class="cursor-pointer text-xl hidden lg:block"><i class="ri-user-line"></i></li>
+		
+				</ul>
+			</nav>
+			<div id="sidebar" class="sticky inset-0 h-[32rem] z-50 w-full md:w-96 bg-white flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
+				<ul class="h-52 flex flex-col gap-6 p-7 font-normal">
+					<li>Products</li>
+					<li>Products</li>
+					<li>Products</li>
+				</ul>
+				<i class="ri-user-line cursor-pointer text-xl p-7 flex gap-5 items-center">
+					<p class="text-md">Login/Signup</p>
+				</i>
+			</div>
+		</nav>
+
+		{%block content %} {% endblock %}
+
+		<script>
+			const toggleBtn = document.querySelector('#toggleBtn')
+			const sidebar = document.querySelector('#sidebar')
+			toggleBtn.addEventListener('click',()=>{
+				sidebar.classList.toggle("-translate-x-full")
+				sidebar.classList.toggle("translate-x-0")
+			})
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <main>
+
+        <!-- main page background-image -->
+        <div id="banner" class="h-[25rem] md:h-[36rem] lg:h-[90vh] w-full bg-no-repeat bg-cover bg-center flex justify-center">
+            <div class="text-white relative flex flex-col items-center justify-end mb-24">
+                <h1 class="text-4xl text-center leading-normal font-semibold">Browser our latest product</h1>
+                <button class="border border-white py-2 px-5 w-32 mt-5"><a href="">Shop all</a></button>
+            </div>
+        </div>
+
+        <!-- featuredProduct -->
+        <div id="featuredProduct">
+            {% for i in data %}
+            <div id="product" class="flex flex-col w-full sm:flex-row md:justify-center px-5 py-9">
+                <div class="flex w-full md:w-96 justify-center">
+                    <img class="h-80 sm:h-[27rem] cursor-pointer" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\shirt.jpg' %}" alt="">
+                </div>
+                <div class="sm:w-96 my-7 md:my-0">
+                    <p class="text-gray-400 text-xs">{store_name}</p>
+                    <h2 class="text-3xl sm:5xl">{{i.featured_product_name}}</h2>
+                    <p class="my-6">Rs.{{i.featured_product_price}}</p>
+                    <p>Quantity</p>
+                    <div class="border border-black flex justify-between items-center w-32 h-12 text-xl px-3 mt-2 mb-5">
+                        <p class="cursor-pointer">-</p>
+                        <p>2</p>
+                        <p class="cursor-pointer">+</p>
+                    </div>
+                    <button class="border border-black h-14 w-full mb-4">Add to cart</button>
+                    <button class="border border-black h-14 w-full mb-4 bg-black text-white">Buy it now</button>
+                    <div class="flex justify-between">
+                        <div class="flex gap-3 cursor-pointer">
+                            <i class="ri-upload-2-line"></i>
+                            <p>Share</p>
+                        </div>
+                        <div class="flex gap-3 cursor-pointer">
+                            <p>View full details</p>
+                            <i class="ri-arrow-right-line"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </main>
+
+{% endblock %}
