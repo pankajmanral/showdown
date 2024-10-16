@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-xzpvhe8)04*t*5kjo90d4v!=0*81lb842xt!0*9&u&5%e&4tsf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.0.107']
+
 
 
 # Application definition
@@ -143,10 +144,17 @@ USE_TZ = True
 
 
 # to load the images in the html file 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR/'static'] 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+import os 
+
+# to upload static img 
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR/'static'] 
+
+# to upload images from database 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')

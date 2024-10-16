@@ -9,7 +9,7 @@
         <div id="banner" class="h-[25rem] md:h-[36rem] lg:h-[90vh] w-full bg-no-repeat bg-cover bg-center flex justify-center">
             <div class="text-white relative flex flex-col items-center justify-end mb-24">
                 <h1 class="text-4xl text-center leading-normal font-semibold">Browser our latest product</h1>
-                <button class="border border-white py-2 px-5 w-32 mt-5"><a href="">Shop all</a></button>
+                <button class="border border-white py-2 px-5 w-32 mt-5"><a href="{% url 'all_product' %}">Shop all</a></button>
             </div>
         </div>
 
@@ -18,12 +18,12 @@
             {% for i in data %}
             <div id="product" class="flex flex-col w-full sm:flex-row md:justify-center px-5 py-9">
                 <div class="flex w-full md:w-96 justify-center">
-                    <img class="h-80 sm:h-[27rem] cursor-pointer" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\shirt.jpg' %}" alt="">
+                    <img class="h-80 sm:h-[27rem] md:w-80 cursor-pointer" src="{{i.featured_product.product_image.url}}" alt="">
                 </div>
                 <div class="sm:w-96 my-7 md:my-0">
-                    <p class="text-gray-400 text-xs">{store_name}</p>
-                    <h2 class="text-3xl sm:5xl">{{i.featured_product_name}}</h2>
-                    <p class="my-6">Rs.{{i.featured_product_price}}</p>
+                    <p class="text-gray-400 text-xs">{{i.featured_product.product_brand}}</p>
+                    <h2 class="text-3xl sm:5xl">{{i.featured_product.product_name}}</h2>
+                    <p class="my-6">Rs.{{i.featured_product.product_price}}</p>
                     <p>Quantity</p>
                     <div class="border border-black flex justify-between items-center w-32 h-12 text-xl px-3 mt-2 mb-5">
                         <p class="cursor-pointer">-</p>
@@ -38,13 +38,49 @@
                             <p>Share</p>
                         </div>
                         <div class="flex gap-3 cursor-pointer">
-                            <p>View full details</p>
+                            <a href="{% url 'product_detail' i.id %}"><p>View full details</p></a>
                             <i class="ri-arrow-right-line"></i>
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
+        </div>
+
+        <div id="collection" class="flex justify-center lg:pt-10 pb-20">
+            <div class="px-5 lg:h-[37rem] lg:w-[80rem]">
+                <h1 class="text-xl md:text-2xl lg:text-3xl my-5 lg:ms-5">Collection</h1>
+                <div class="grid grid-rows-3 gap-16 lg:gap-5 lg:grid-rows-1 lg:grid-cols-3 lg:h-[30rem]">
+                    <div class="flex justify-center">
+                        <div class="">
+                            <a href="{% url 'mens_product' %}"><img class="h-full w-full" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\shirt.jpg' %}" alt=""></a>
+                            <div class="flex items-center gap-1">
+                                <h1 class="mt-1 mb-2 text-md md:text-xl lg:text-3xl">Men</h1>
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="flex justify-center">
+                        <div class="">
+                            <a href="{% url 'womens_product' %}"><img class="h-full w-full" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\CKS00551.webp' %}" alt=""></a>
+                            <div class="flex items-center gap-1">
+                                <h1 class="mt-1 mb-2 text-md md:text-xl lg:text-3xl">Women</h1>
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="flex justify-center">
+                        <div class="">
+                            <a href="{% url 'kids_product' %}"><img class="h-full w-full" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\shirt.jpg' %}" alt=""></a>
+                            <div class="flex items-center gap-1">
+                                <h1 class="mt-1 mb-2 text-md md:text-xl lg:text-3xl">Kids</h1>
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </div>
+                    </div>                    
+                                        
+                </div>
+            </div>
         </div>
 
     </main>
