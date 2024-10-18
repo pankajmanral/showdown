@@ -37,7 +37,7 @@
 			<p class="h-10 py-2 text-center">Welcome to {site_name}</p>
 			<hr>
 			<nav class="h-28 w-full flex items-center justify-between px-1 lg:px-20">
-				<ul>
+				<ul class="">
 					<button id="toggleBtn" class="w-20 h-28 lg:hidden">
 						<i class="ri-menu-line text-xl hover:font-bold"></i>
 					</button>
@@ -53,31 +53,30 @@
 					<a href="{% url 'index' %}"><img class="h-16 sm:h-20" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\logo.png' %}" alt=""></a>
 				</div>
 				<ul class="flex w-20 lg:w-80 lg:px-24 justify-evenly items-center">
-					<li class="cursor-pointer text-xl hover:font-bold"><i class="ri-handbag-line"></i></li>
+					<a href="{% url 'cart' %}"><li class="cursor-pointer text-xl hover:font-bold"><i class="ri-handbag-line"></i></li></a>
 					<li class="cursor-pointer text-xl hidden lg:block hover:font-bold"><i class="ri-user-line"></i></li>
-		
 				</ul>
 			</nav>
-			<div id="sidebar" class="relataive sticky z-50 h-[38rem]  w-full md:w-96 bg-white flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
+			<div id="sidebar" class="relataive sticky z-50 h-[100vh] w-full md:w-96 bg-white flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
 				<ul class="h-52 flex flex-col gap-6 p-7 font-normal">
+					<li>
+						<i class="ri-user-line cursor-pointer text-xl  flex gap-5 items-center">
+							<p class="text-md hover:font-bold">Login/Signup</p>
+						</i>
+					</li>
 					<li class="cursor-pointer hover:font-bold"><a href="{% url 'all_product' %}">Products</a></li>
 					<li class="cursor-pointer hover:font-bold">Contact</li>
 					<li class="cursor-pointer hover:font-bold">About us</li>
 				</ul>
-				<i class="ri-user-line cursor-pointer text-xl p-7 flex gap-5 items-center">
-					<p class="text-md hover:font-bold">Login/Signup</p>
-				</i>
+				
 			</div>
 		</nav>
 		<hr>
-
-		<!-- transform -translate-y-full -->
-
+		
 		
 		{%block content %} {% endblock %}
 			
 		
-
 		<script src="{% static 'D:\Pankaj CLG\showdown\main\static\js\script.js' %}"></script>
 
 	</body>

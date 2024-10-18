@@ -4,6 +4,7 @@
 {% block content %}
 
     
+    <!-- dropdown that appears when add to cart is clicked  -->
     <div id="cartDropdown" class="fixed top-40 right-0 bg-white h-[21rem] w-full sm:w-96 transform -translate-y-full transition-transform duration-300 ease-in-out z-30">
         <div>
             <div class="">
@@ -18,14 +19,14 @@
                 </div>
                 <div class="flex px-5">
                     <div class="h-32 w-24 pt-2">
-                        <img src="{% static 'D:\Pankaj CLG\showdown\main\static\img\Men Drop Shoulder Button Front Shirt.jpeg' %}" alt="">
+                        <img id="dropdownImage" src="" alt="">
                     </div>
                     <div class="ms-2 w-44 h-32 text-wrap pt-1">
-                        <h1 class="text-sm">data</h1>
+                        <h1 id="dropdownName" class="text-sm"></h1>
                     </div>
                 </div>
                 <div class="px-5 mt-5 flex flex-col gap-2">
-                    <button class="border-black border-2 w-full h-12">View Cart</button>
+                    <a href="{% url 'cart' %}"><button class="border-black border-2 w-full h-12">View Cart</button></a>
                     <button class="w-full h-12 bg-black text-white">Check out</button>
                 </div>
                 <div>
@@ -62,7 +63,7 @@
                         <p>2</p>
                         <p class="cursor-pointer">+</p>
                     </div>
-                    <button id="addCartBtn" data-product-id="{{ i.id }}" date-product-img="{{ i.featured_product.product_image.url }}" class="border border-black h-14 w-full mb-4">Add to cart</button>
+                    <button id="addCartBtn" data-product-name = "{{ i.featured_product.product_name }}" data-product-img="{{ i.featured_product.product_image.url }}" class="border border-black h-14 w-full mb-4">Add to cart</button>
                     <a href=""><button class="border border-black h-14 w-full mb-4 bg-black text-white">Buy it now</button></a>
                     <div class="flex justify-between">
                         <div class="flex gap-3 cursor-pointer">

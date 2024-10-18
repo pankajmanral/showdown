@@ -13,30 +13,34 @@ const crossBtn = document.querySelectorAll("#crossBtn")
 addCartBtn.forEach((button) =>{
     button.addEventListener("click",()=>{
 
+        const productName = button.getAttribute('data-product-name')
+        const productImage = button.getAttribute('data-product-img')
+        
+        document.querySelector("#dropdownName").textContent = productName
+        document.querySelector("#dropdownImage").src = productImage
+        
         cartDropdown.classList.remove("-translate-y-full")
 
-        const productImage = this.getAtt
-
+        setTimeout(()=>{
+            closeFunction()
+        },2000)
+    
     })
 })
-
-const openFunctioin = () => {
-    cartDropdown.classList.remove("-translate-y-full")
-
-    setTimeout(()=>{
-        closeFunction()
-    },5000)
-
-}
 
 const closeFunction = () => {
     cartDropdown.classList.add("-translate-y-full")
 }
 
-addCartBtn.forEach((btn) =>{
-    btn.addEventListener("click",openFunctioin)
-})
-
 crossBtn.forEach((btn) => {
     btn.addEventListener("click",closeFunction)
 })
+
+// const openFunctioin = () => {
+//     cartDropdown.classList.remove("-translate-y-full")
+// }
+
+
+// addCartBtn.forEach((btn) =>{
+//     btn.addEventListener("click",openFunctioin)
+// })
