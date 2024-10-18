@@ -33,7 +33,7 @@
 
 	<body>
 		
-		<nav class="h-40 w-full sticky inset-0 bg-white z-10">
+		<nav class="h-40 w-full fixed inset-0 bg-white z-50">
 			<p class="h-10 py-2 text-center">Welcome to {site_name}</p>
 			<hr>
 			<nav class="h-28 w-full flex items-center justify-between px-1 lg:px-20">
@@ -58,7 +58,7 @@
 		
 				</ul>
 			</nav>
-			<div id="sidebar" class="sticky inset-0 h-[38rem] z-50 w-full md:w-96 bg-white flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
+			<div id="sidebar" class="relataive sticky z-50 h-[38rem]  w-full md:w-96 bg-white flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
 				<ul class="h-52 flex flex-col gap-6 p-7 font-normal">
 					<li class="cursor-pointer hover:font-bold"><a href="{% url 'all_product' %}">Products</a></li>
 					<li class="cursor-pointer hover:font-bold">Contact</li>
@@ -71,16 +71,14 @@
 		</nav>
 		<hr>
 
-		{%block content %} {% endblock %}
+		<!-- transform -translate-y-full -->
 
-		<script>
-			const toggleBtn = document.querySelector('#toggleBtn')
-			const sidebar = document.querySelector('#sidebar')
-			toggleBtn.addEventListener('click',()=>{
-				sidebar.classList.toggle("-translate-x-full")
-				sidebar.classList.toggle("translate-x-0")
-			})
-		</script>
+		
+		{%block content %} {% endblock %}
+			
+		
+
+		<script src="{% static 'D:\Pankaj CLG\showdown\main\static\js\script.js' %}"></script>
 
 	</body>
 </html>

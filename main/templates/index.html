@@ -3,10 +3,42 @@
 
 {% block content %}
 
+    
+    <div id="cartDropdown" class="fixed top-40 right-0 bg-white h-[21rem] w-full sm:w-96 transform -translate-y-full transition-transform duration-300 ease-in-out z-30">
+        <div>
+            <div class="">
+                <div class="flex justify-between items-center px-5">
+                    <div class="flex gap-1">
+                        <i class="ri-check-line text-sm"></i>
+                        <p class="text-sm">Items added to your cart</p>
+                    </div>
+                    <div id="crossBtn">
+                        <i class="ri-close-line font-light text-3xl cursor-pointer"></i>
+                    </div>
+                </div>
+                <div class="flex px-5">
+                    <div class="h-32 w-24 pt-2">
+                        <img src="{% static 'D:\Pankaj CLG\showdown\main\static\img\Men Drop Shoulder Button Front Shirt.jpeg' %}" alt="">
+                    </div>
+                    <div class="ms-2 w-44 h-32 text-wrap pt-1">
+                        <h1 class="text-sm">data</h1>
+                    </div>
+                </div>
+                <div class="px-5 mt-5 flex flex-col gap-2">
+                    <button class="border-black border-2 w-full h-12">View Cart</button>
+                    <button class="w-full h-12 bg-black text-white">Check out</button>
+                </div>
+                <div>
+                    <a href="{% url 'all_product' %}"><h3 class="text-center text-sm mt-3 underline">Continue Shopping</h3></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <main>
 
         <!-- main page background-image -->
-        <div id="banner" class="h-[25rem] md:h-[36rem] lg:h-[90vh] w-full bg-no-repeat bg-cover bg-center flex justify-center">
+        <div id="banner" class="mt-32 h-[25rem] md:h-[36rem] lg:h-[90vh] w-full bg-no-repeat bg-cover bg-center flex justify-center">
             <div class="text-white relative flex flex-col items-center justify-end mb-24">
                 <h1 class="text-4xl text-center leading-normal font-semibold">Browser our latest product</h1>
                 <button class="border border-white py-2 px-5 w-32 mt-5"><a href="{% url 'all_product' %}">Shop all</a></button>
@@ -16,7 +48,7 @@
         <!-- featuredProduct -->
         <div id="featuredProduct">
             {% for i in data %}
-            <div id="product" class="flex flex-col w-full sm:flex-row md:justify-center px-5 py-9">
+            <div id="product" class="flex flex-col w-full sm:flex-row md:justify-center p-5">
                 <div class="flex w-full md:w-96 justify-center">
                     <img class="h-80 sm:h-[27rem] md:w-80 cursor-pointer" src="{{i.featured_product.product_image.url}}" alt="">
                 </div>
@@ -30,15 +62,15 @@
                         <p>2</p>
                         <p class="cursor-pointer">+</p>
                     </div>
-                    <button class="border border-black h-14 w-full mb-4">Add to cart</button>
-                    <button class="border border-black h-14 w-full mb-4 bg-black text-white">Buy it now</button>
+                    <button id="addCartBtn" data-product-id="{{ i.id }}" date-product-img="{{ i.featured_product.product_image.url }}" class="border border-black h-14 w-full mb-4">Add to cart</button>
+                    <a href=""><button class="border border-black h-14 w-full mb-4 bg-black text-white">Buy it now</button></a>
                     <div class="flex justify-between">
                         <div class="flex gap-3 cursor-pointer">
                             <i class="ri-upload-2-line"></i>
                             <p>Share</p>
                         </div>
                         <div class="flex gap-3 cursor-pointer">
-                            <a href="{% url 'product_detail' i.id %}"><p>View full details</p></a>
+                            <a href="{% url 'featured_product_detail' i.id %}"><p>View full details</p></a>
                             <i class="ri-arrow-right-line"></i>
                         </div>
                     </div>
@@ -47,38 +79,38 @@
             {% endfor %}
         </div>
 
+        <!-- collection of different gender -->
         <div id="collection" class="flex justify-center lg:pt-10 pb-20">
             <div class="px-5 lg:h-[37rem] lg:w-[80rem]">
                 <h1 class="text-xl md:text-2xl lg:text-3xl my-5 lg:ms-5">Collection</h1>
-                <div class="grid grid-rows-3 gap-16 lg:gap-5 lg:grid-rows-1 lg:grid-cols-3 lg:h-[30rem]">
+                <div class="grid grid-rows-3 gap-16 lg:gap-5 h-[70rem] sm:h-full lg:grid-rows-1 lg:grid-cols-3 lg:h-[30rem]">
                     <div class="flex justify-center">
                         <div class="">
-                            <a href="{% url 'mens_product' %}"><img class="h-full w-full" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\shirt.jpg' %}" alt=""></a>
+                            <a href="{% url 'mens_product' %}"><img class="h-full sm:h-[36rem] w-[20rem] sm:w-[44rem]" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\shirt.jpg' %}" alt=""></a>
                             <div class="flex items-center gap-1">
-                                <h1 class="mt-1 mb-2 text-md md:text-xl lg:text-3xl">Men</h1>
+                                <h1 class="mt-1 mb-2 text-md md:text-xl lg:text-2xl">Men</h1>
                                 <i class="ri-arrow-right-line"></i>
                             </div>
                         </div>
-                    </div>                    
+                    </div>                  
                     <div class="flex justify-center">
                         <div class="">
-                            <a href="{% url 'womens_product' %}"><img class="h-full w-full" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\CKS00551.webp' %}" alt=""></a>
+                            <a href="{% url 'womens_product' %}"><img class="h-full sm:h-[36rem] w-[20rem] sm:w-[44rem]" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\maternity-shirt-dress9_722adb89-4548-47f9-b1b0-52278bc7f58c_720x.webp' %}" alt=""></a>
                             <div class="flex items-center gap-1">
-                                <h1 class="mt-1 mb-2 text-md md:text-xl lg:text-3xl">Women</h1>
+                                <h1 class="mt-1 mb-2 text-md md:text-xl lg:text-2xl">Men</h1>
                                 <i class="ri-arrow-right-line"></i>
                             </div>
                         </div>
-                    </div>                    
+                    </div>                  
                     <div class="flex justify-center">
                         <div class="">
-                            <a href="{% url 'kids_product' %}"><img class="h-full w-full" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\shirt.jpg' %}" alt=""></a>
+                            <a href="{% url 'mens_product' %}"><img class="h-full sm:h-[36rem] w-[20rem] sm:w-[44rem]" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\shirt.jpg' %}" alt=""></a>
                             <div class="flex items-center gap-1">
-                                <h1 class="mt-1 mb-2 text-md md:text-xl lg:text-3xl">Kids</h1>
+                                <h1 class="mt-1 mb-2 text-md md:text-xl lg:text-2xl">Men</h1>
                                 <i class="ri-arrow-right-line"></i>
                             </div>
                         </div>
-                    </div>                    
-                                        
+                    </div>                  
                 </div>
             </div>
         </div>

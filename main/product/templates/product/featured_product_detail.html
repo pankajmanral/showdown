@@ -17,10 +17,10 @@
                 </div>
                 <div class="flex px-5">
                     <div class="h-32 w-24 pt-2">
-                        <img src="{{ detail.product_image.url }}" alt="">
+                        <img src="{{ data.featured_product.product_image.url }}" alt="">
                     </div>
                     <div class="ms-2 w-44 h-32 text-wrap pt-1">
-                        <h1 class="text-sm">{{ detail.product_name }}</h1>
+                        <h1 class="text-sm">{{data.featured_product.product_name}}</h1>
                     </div>
                 </div>
                 <div class="px-5 mt-5 flex flex-col gap-2">
@@ -34,14 +34,14 @@
         </div>
     </div>
 
-    <div id="productDetail" class="mt-32 flex flex-col w-full sm:flex-row md:justify-center px-5 pt-9">
+    <div id="productDetail" class="flex flex-col w-full sm:flex-row md:justify-center px-5 pt-9 mt-40">
         <div class="flex w-full md:w-96 justify-center">
-            <img class="h-80 sm:h-[27rem] md:w-80 cursor-pointer sticky top-48" src="{{ detail.product_image.url }}" alt="">
+            <img class="h-80 sm:h-[27rem] md:w-80 cursor-pointer sticky top-48" src="{{ data.featured_product.product_image.url }}" alt="">
         </div>
         <div class="sm:w-96 my-7 md:my-0">
-            <p class="text-gray-400 text-xs">{{detail.product_brand}}</p>
-            <h2 class="text-3xl sm:5xl">{{detail.product_name}}</h2>
-            <p class="my-6">Rs.{{detail.product_price}}</p>
+            <p class="text-gray-400 text-xs">{{data.featured_product.product_brand}}</p>
+            <h2 class="text-3xl sm:5xl">{{data.featured_product.product_name}}</h2>
+            <p class="my-6">Rs.{{data.featured_product.product_price}}</p>
             <p>Quantity</p>
             <div class="border border-black flex justify-between items-center w-32 h-12 text-xl px-3 mt-2 mb-5">
                 <p class="cursor-pointer">-</p>
@@ -64,7 +64,7 @@
         <div class="w-full lg:w-[82rem] px-5">
             <h1 class="text-2xl mt-10">You may also like</h1>
             <div class="grid grid-cols-2 lg:grid-cols-4 mt-4 gap-2  ">
-                {% for i in data %}
+                {% for i in suggested %}
                     <div class="mt-5">
                             <a href="{% url 'product_detail' i.id %}"><img class="sm:h-80 sm:w-80" src="{{ i.product_image.url }}" alt=""></a>
                             <h1 class="mb-2">{{ i.product_name }}</h1>

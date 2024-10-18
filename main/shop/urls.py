@@ -21,7 +21,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
-    path('product/',include('product.urls'))
+    path('product/',include('product.urls')),
+    path('cart/',include('cart.urls'))
 ]
 
 from django.conf import settings
