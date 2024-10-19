@@ -3,12 +3,12 @@
 
 {% block content %}
 
-    <div class="mt-40 md:px-5 lg:px-28">
+    <div class="mt-40 md:px-5 lg:px-28 pb-10">
         <hr>
         <div class="p-5">
             <div class="flex justify-between items-end">
                 <h1 class="text-2xl">Your cart</h1>
-                <a href=""><p class="underline text-sm font-thin tracking-wide">Continue shopping</p></a>
+                <a href="{% url 'all_product' %}"><p class="underline text-sm font-thin tracking-wide">Continue shopping</p></a>
             </div>
             <div class="flex justify-between mt-5 text-xs text-gray-400">
                 <h3>PRODUCT</h3>
@@ -16,7 +16,7 @@
             </div>
             <hr class="mt-3">
         </div>
-        <div class="px-1">
+        <div class="px-1 mt-3">
             <div class="py-2">
                 <div class="p-2 grid grid-cols-3 grid-rows-2 sm:grid-cols-4 sm:grid-rows-1">
                     <div class="block sm:hidden h-36 w-24 row-span-2">
@@ -63,7 +63,7 @@
             </div>
             
         </div>
-        <div class="px-1">
+        <div class="px-1 mt-3">
             <div class="py-2">
                 <div class="p-2 grid grid-cols-3 grid-rows-2 sm:grid-cols-4 sm:grid-rows-1">
                     <div class="block sm:hidden h-36 w-24 row-span-2">
@@ -110,7 +110,7 @@
             </div>
             
         </div>
-        <div class="px-1">
+        <div class="px-1 mt-3">
             <div class="py-2">
                 <div class="p-2 grid grid-cols-3 grid-rows-2 sm:grid-cols-4 sm:grid-rows-1">
                     <div class="block sm:hidden h-36 w-24 row-span-2">
@@ -157,7 +157,7 @@
             </div>
             
         </div>
-        <div class="px-1">
+        <div class="px-1 mt-3">
             <div class="py-2">
                 <div class="p-2 grid grid-cols-3 grid-rows-2 sm:grid-cols-4 sm:grid-rows-1">
                     <div class="block sm:hidden h-36 w-24 row-span-2">
@@ -203,6 +203,15 @@
                 </div>
             </div>
             
+        </div>
+
+        <div class="flex justify-center sm:justify-end">
+            <hr>
+            <div class="text-center w-60 sm:text-right sm:w-72">
+                <p class="">Estimated total <span class="sm:text-lg sm:ms-3">Rs. 10,000</span></p>
+                <h6 class="text-xs mt-2">Taxes,discount and shipping calculated at checkout</h6>
+                <a href=""><button class="bg-black text-white h-12 w-full mt-5">Check out</button></a>
+            </div>
         </div>
     </div>
 

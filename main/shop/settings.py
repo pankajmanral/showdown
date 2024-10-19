@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'theme',
     'django_extensions',
     'product.apps.ProductConfig',
-    'cart.apps.CartConfig'
+    'cart.apps.CartConfig',
+    'account'
 ]
 
 TAILWIND_APP_NAME = 'theme'
