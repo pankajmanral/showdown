@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
     path('product/',include('product.urls')),
-    path('cart/',include('cart.urls'))
+    path('cart/',include('cart.urls')),
+    path('checkout/',include('checkout.urls'))
 ]
 
 from django.conf import settings

@@ -23,7 +23,7 @@ addCartBtn.forEach((button) =>{
 
         setTimeout(()=>{
             closeFunction()
-        },1000)
+        },5000)
     
     })
 })

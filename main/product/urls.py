@@ -8,6 +8,5 @@ urlpatterns = [
     path('womens/',views.womens_product,name='womens_product'),
     path('kids/',views.kids_product,name='kids_product'),
     path('detail/<int:id>/',views.product_detail,name='product_detail'),
-    path('featured-product/<int:id>/',views.featured_product_detail,name='featured_product_detail'),
 
 ]
