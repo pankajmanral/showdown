@@ -12,6 +12,9 @@ class Customer(models.Model):
     gender = models.CharField(choices=gender_choice,max_length=1,default=None)
     dob = models.DateField(default=None)
 
+    def __str__(self):
+        return f'{self.user.username}'
+
 STATE_CHOICES = [
     ('AP', 'Andhra Pradesh'),
     ('AR', 'Arunachal Pradesh'),

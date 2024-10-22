@@ -23,7 +23,8 @@ urlpatterns = [
     path('',views.index,name='index'),
     path('product/',include('product.urls')),
     path('cart/',include('cart.urls')),
-    path('checkout/',include('checkout.urls'))
+    path('checkout/',include('checkout.urls')),
+    path('account/',include('account.urls'))
 ]
 
 from django.conf import settings
