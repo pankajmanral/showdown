@@ -39,14 +39,17 @@
                                 <p class="mt-2 text-sm">RS {{ i.cart_product.product_price }}</p>
                             </div>
                         </div>
-                        <div class="hidden sm:flex  sm:justify-center sm:items-center sm:gap-5">
+                        <div class="hidden sm:flex sm:justify-center sm:items-center sm:gap-5">
                             <div class="border border-black hidden w-32 h-12 text-xl px-3 sm:flex justify-between items-center">
                                 <p class="cursor-pointer">-</p>
                                 <p>{{ i.quantity }}</p>
                                 <p class="cursor-pointer">+</p>
                             </div>
                             <div>
-                                <i class="ri-delete-bin-line"></i>
+                                <form action="{% url 'delete_product' i.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button class="h-full w-1/2 cursor-pointer"><i class="ri-delete-bin-line"></i></button>
+                                </form>
                             </div>
                         </div>
                         <div class="ms-3 flex justify-end sm:items-center ">
@@ -60,7 +63,10 @@
                             </div>
                         </div>
                         <div class="sm:hidden h-12 flex justify-end items-center">
-                            <button class="h-full w-1/2"><i class="ri-delete-bin-line"></i></button>
+                            <form action="{% url 'delete_product' i.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="h-full w-1/2 cursor-pointer"><i class="ri-delete-bin-line"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -73,7 +79,7 @@
             <div class="text-center w-60 sm:text-right sm:w-72">
                 <p class="">Estimated total <span class="sm:text-lg sm:ms-3">Rs.</span></p>
                 <h6 class="text-xs mt-2">Taxes,discount and shipping calculated at checkout</h6>
-                <a href=""><button class="bg-black text-white h-12 w-full mt-5">Check out</button></a>
+                <a href="{% url 'checkout' %}"><button class="bg-black text-white h-12 w-full mt-5">Check out</button></a>
             </div>
         </div>
     </div>

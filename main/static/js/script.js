@@ -1,3 +1,5 @@
+// sidebar navigation
+
 const toggleBtn = document.querySelector('#toggleBtn')
 const sidebar = document.querySelector('#sidebar')
 
@@ -5,6 +7,8 @@ toggleBtn.addEventListener('click',()=>{
     sidebar.classList.toggle("-translate-x-full")
     sidebar.classList.toggle("translate-x-0")
 })
+
+// cart dropdown 
 
 const cartDropdown = document.querySelector("#cartDropdown")
 const addCartBtn = document.querySelectorAll("#addCartBtn")
@@ -36,11 +40,5 @@ crossBtn.forEach((btn) => {
     btn.addEventListener("click",closeFunction)
 })
 
-// const openFunctioin = () => {
-//     cartDropdown.classList.remove("-translate-y-full")
-// }
+// checkout page 
 
-
-// addCartBtn.forEach((btn) =>{
-//     btn.addEventListener("click",openFunctioin)
-// })

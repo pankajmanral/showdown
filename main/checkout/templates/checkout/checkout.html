@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %} 
+
+    <div class="relative mt-40 mx-5">
+        <div id="summary" class="h-10 flex justify-between items-center">
+            <h1 class="text-xs" id="summaryText">Open summary</h1>
+            <h1 class="font-bold">RS 9999</h1>
+        </div>
+        <div id="summaryTable" class="mt-2 flex flex-col gap-3">
+            {% for i in data %}
+            <div class="flex justify-between gap-2 mb-3">
+                <div class="h-[3.8rem] border  rounded-lg w-16 flex justify-center">
+                    <img class="h-full w-[80%]" src="{{ i.cart_product.product_image.url }}" alt="">
+                </div>
+                <div class="mt-2  w-60">
+                    <h1 class="text-sm">{{ i.cart_product.product_name }}</h1>
+                </div>
+                <div class="mt-2 w-10 flex justify-end">
+                    <h1 class="text-sm">{{ i.total_cost }}</h1>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div id="green" class="absolute top-10 bg-white h-screen w-full transition-top transition-all duration-500 ease-in-out">
+            
+        </div>  
+    </div>
+
+    <script>
+
+        const summary = document.querySelector("#summary")
+        const green = document.querySelector("#green")
+        const name = document.querySelector("#name")
+        const summaryTable = document.querySelector("#summaryTable")
+        const summaryText = document.querySelector("#summaryText")
+        let isOpen = false
+
+        summary.addEventListener("click",()=>{
+
+            const topHeight = summaryTable.offsetTop
+            const tableHeight = summaryTable.offsetHeight
+            const totalHeight = topHeight + tableHeight
+            
+            if(isOpen){
+                green.style.top = '40px'
+                summaryText.textContent = "Show summary"
+            }
+            else{
+                green.style.top = `${totalHeight}px`
+                summaryText.textContent = "Hide summary"
+            }
+            isOpen = !isOpen
+        })
+
+    </script>
+
+
+{% endblock %}
