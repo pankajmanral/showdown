@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="mt-40">
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Enter username" id="">
+            <input type="password" name="password" placeholder="Enter password" id="">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+{% endblock %}
