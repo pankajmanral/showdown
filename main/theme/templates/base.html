@@ -60,10 +60,16 @@
 			<div id="sidebar" class="relataive sticky z-50 h-[100vh] w-full md:w-96 bg-white flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
 				<ul class="h-52 flex flex-col gap-6 p-7 font-normal">
 					<li>
-						<i class="ri-user-line cursor-pointer text-xl  flex gap-5 items-center">
-							<p class="text-md hover:font-bold">Login/Signup</p>
-							<a href="{% url 'login' %}">Login</a>
-						</i>
+						{% if request.user.is_authenticated %}
+							<p>Hello {{ request.user }}</p>
+							<i class="ri-user-line cursor-pointer text-xl  flex gap-5 items-center">
+								<a href="{% url 'logout' %}"><p class="text-md hover:font-bold">Logout</p></a>
+							</i>
+						{% else %}
+							<i class="ri-user-line cursor-pointer text-xl  flex gap-5 items-center">
+								<a href="{% url 'login' %}"><p class="text-md hover:font-bold">Login/Signup</p></a>
+							</i>
+						{% endif %}
 					</li>
 					<li class="cursor-pointer hover:font-bold"><a href="{% url 'all_product' %}">Products</a></li>
 					<li class="cursor-pointer hover:font-bold">Contact</li>

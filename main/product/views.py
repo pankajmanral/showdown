@@ -20,7 +20,8 @@ def womens_product(request):
 
 def kids_product(request):
     kids = Product.objects.filter(tag="K")
-    return render(request,'product/kids_product.html',{'kid':kids})
+    number = Product.objects.filter(tag="F").count()
+    return render(request,'product/kids_product.html',{'kid':kids,'number':number})
 
 def product_detail(request,id):
     details = get_object_or_404(Product,id = id)

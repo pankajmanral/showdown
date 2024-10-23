@@ -55,10 +55,11 @@ class Login(View):
         password = request.POST.get('password')
         user = authenticate(request,username = username,password = password)
         if user : 
+            login(request,user)
             return redirect('index')
         else:
             return render('login')
         
-def logout(request):
+def logout_user(request):
     logout(request)
     return redirect('/')

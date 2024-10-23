@@ -3,15 +3,15 @@
 
 {% block content %} 
 
-    <div class="relative mt-40 mx-5">
-        <div id="summary" class="h-10 flex justify-between items-center">
+    <div class="relative mt-40">
+        <div id="summary" class="h-16 flex justify-between items-center bg-[#F5F5F5] px-5">
             <h1 class="text-xs" id="summaryText">Open summary</h1>
             <h1 class="font-bold">RS 9999</h1>
         </div>
-        <div id="summaryTable" class="mt-2 flex flex-col gap-3">
+        <div id="summaryTable" class="mt-2 flex flex-col gap-3 px-5">
             {% for i in data %}
             <div class="flex justify-between gap-2 mb-3">
-                <div class="h-[3.8rem] border  rounded-lg w-16 flex justify-center">
+                <div class="h-[3.8rem] border  rounded-lg w-16 flex justify-center bg-[#F5F5F5]">
                     <img class="h-full w-[80%]" src="{{ i.cart_product.product_image.url }}" alt="">
                 </div>
                 <div class="mt-2  w-60">
@@ -22,8 +22,33 @@
                 </div>
             </div>
             {% endfor %}
+            <div class="flex justify-between">
+                <div class="flex items-center">
+                    <h1 class="text-sm">Subtotal -</h1>
+                    <h1 class="text-sm ms-1">Count</h1>
+                </div>
+                <div>
+                    <h1 class="text-sm">{ total_cost }</h1>
+                </div>
+            </div>
+            <div class="flex justify-between">
+                <div class="flex items-center">
+                    <h1 class="text-sm">Estimated taxes</h1>
+                </div>
+                <div>
+                    <h1 class="text-sm">{ cost }</h1>
+                </div>
+            </div>
+            <div class="flex justify-between">
+                <div class="flex items-center">
+                    <h1 class="text-md font-bold">Total</h1>
+                </div>
+                <div>
+                    <h1 class="text-md font-bold">{ total }</h1>
+                </div>
+            </div>
         </div>
-        <div id="green" class="absolute top-10 bg-white h-screen w-full transition-top transition-all duration-500 ease-in-out">
+        <div id="green" class="absolute top-16 bg-white h-screen w-full transition-top transition-all duration-500 ease-in-out">
             
         </div>  
     </div>
@@ -44,7 +69,7 @@
             const totalHeight = topHeight + tableHeight
             
             if(isOpen){
-                green.style.top = '40px'
+                green.style.top = '64px'
                 summaryText.textContent = "Show summary"
             }
             else{
