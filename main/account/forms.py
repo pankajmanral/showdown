@@ -1,5 +1,5 @@
 from django import forms
-from .models import Customer
+from .models import Customer,Address
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 
@@ -14,3 +14,9 @@ class CustomerRegistrationForm(ModelForm):
     class Meta:
         model = Customer
         exclude = ['user']
+
+class AddressForm(ModelForm):
+    class Meta:
+        model = Address
+        exclude = ['user']
+        # fields = ['title','block_number','building','street','land_mark','area','city','state']

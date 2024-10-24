@@ -58,7 +58,7 @@ class Login(View):
             login(request,user)
             return redirect('index')
         else:
-            return render('login')
+            return redirect('login')
         
 def logout_user(request):
     logout(request)

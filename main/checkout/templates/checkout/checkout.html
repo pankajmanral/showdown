@@ -48,8 +48,15 @@
                 </div>
             </div>
         </div>
-        <div id="green" class="absolute top-16 bg-white h-screen w-full transition-top transition-all duration-500 ease-in-out">
-            
+        <div id="green" class="absolute top-16 bg-white h-screen w-full transition-top transition-all duration-500 ease-in-out px-5">
+            <form method="post">
+                {% csrf_token %}
+                {% for f in form %}
+                    {{ f.label_tag }}
+                    {{ f }}
+                {% endfor %}
+                <input type="submit" value="SUBMIT">
+            </form>
         </div>  
     </div>
 

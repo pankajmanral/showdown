@@ -3,6 +3,6 @@ from . import views
 
 urlpatterns = [
 
-    path('checkout/',views.checkout,name='checkout')
+    path('checkout/',views.Checkout.as_view(),name='checkout')
 
 ]
