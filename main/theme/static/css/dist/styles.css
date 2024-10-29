@@ -801,6 +801,10 @@ select {
   grid-column: span 1 / span 1;
 }
 
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
 .row-span-2 {
   grid-row: span 2 / span 2;
 }
@@ -892,6 +896,10 @@ select {
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
 }
@@ -948,6 +956,10 @@ select {
   height: 100vh;
 }
 
+.h-\[20rem\] {
+  height: 20rem;
+}
+
 .h-\[21rem\] {
   height: 21rem;
 }
@@ -992,6 +1004,10 @@ select {
   width: 6rem;
 }
 
+.w-28 {
+  width: 7rem;
+}
+
 .w-32 {
   width: 8rem;
 }
@@ -1008,12 +1024,24 @@ select {
   width: 20rem;
 }
 
+.w-\[12\.8rem\] {
+  width: 12.8rem;
+}
+
 .w-\[20rem\] {
   width: 20rem;
 }
 
+.w-\[30\%\] {
+  width: 30%;
+}
+
 .w-\[80\%\] {
   width: 80%;
+}
+
+.w-\[81\%\] {
+  width: 81%;
 }
 
 .w-fit {
@@ -1057,6 +1085,10 @@ select {
 
 .grid-rows-3 {
   grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.grid-rows-5 {
+  grid-template-rows: repeat(5, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -1188,6 +1220,11 @@ select {
   padding: 1.75rem;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1201,6 +1238,11 @@ select {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
 .py-2 {
@@ -1363,6 +1405,10 @@ select {
     margin-inline-start: 0.75rem;
   }
 
+  .sm\:block {
+    display: block;
+  }
+
   .sm\:flex {
     display: flex;
   }
@@ -1435,6 +1481,16 @@ select {
     gap: 1.25rem;
   }
 
+  .sm\:bg-red-100 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(254 226 226 / var(--tw-bg-opacity));
+  }
+
+  .sm\:px-28 {
+    padding-left: 7rem;
+    padding-right: 7rem;
+  }
+
   .sm\:text-right {
     text-align: right;
   }
@@ -1466,6 +1522,10 @@ select {
 
   .md\:w-96 {
     width: 24rem;
+  }
+
+  .md\:w-\[40rem\] {
+    width: 40rem;
   }
 
   .md\:justify-center {
@@ -1519,6 +1579,10 @@ select {
 
   .lg\:w-80 {
     width: 20rem;
+  }
+
+  .lg\:w-\[50rem\] {
+    width: 50rem;
   }
 
   .lg\:w-\[80rem\] {

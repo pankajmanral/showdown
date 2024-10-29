@@ -66,4 +66,4 @@ class Address(models.Model):
     state = models.CharField(max_length=2,choices=STATE_CHOICES)
 
     def __str__(self):
-        return f'{self.user}'
+        return f'{self.user} | {self.title}'

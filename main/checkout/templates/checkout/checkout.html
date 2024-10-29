@@ -4,17 +4,17 @@
 {% block content %} 
 
     <div class="relative mt-40">
-        <div id="summary" class="h-16 flex justify-between items-center bg-[#F5F5F5] px-5">
+        <div id="summary" class="h-16 flex justify-between items-center bg-[#F5F5F5] px-5 sm:px-28 cursor-pointer">
             <h1 class="text-xs" id="summaryText">Open summary</h1>
             <h1 class="font-bold">RS 9999</h1>
         </div>
-        <div id="summaryTable" class="mt-2 flex flex-col gap-3 px-5">
+        <div id="summaryTable" class="mt-2 flex flex-col gap-3 px-5 sm:bg-red-100 sm:px-28">
             {% for i in data %}
             <div class="flex justify-between gap-2 mb-3">
                 <div class="h-[3.8rem] border  rounded-lg w-16 flex justify-center bg-[#F5F5F5]">
                     <img class="h-full w-[80%]" src="{{ i.cart_product.product_image.url }}" alt="">
                 </div>
-                <div class="mt-2  w-60">
+                <div class="mt-2 w-60">
                     <h1 class="text-sm">{{ i.cart_product.product_name }}</h1>
                 </div>
                 <div class="mt-2 w-10 flex justify-end">
@@ -49,13 +49,98 @@
             </div>
         </div>
         <div id="green" class="absolute top-16 bg-white h-screen w-full transition-top transition-all duration-500 ease-in-out px-5">
-            <form method="post">
+            <form method="post" class="w-full flex flex-col items-center">
                 {% csrf_token %}
-                {% for f in form %}
+                
+                <div class="sm:hidden">
+                    <div class="w-full mt-5 px-0">
+                        <div class="flex items-center justify-between mt-1">
+                            <label for="" class="text-sm w-24">Title  </label>
+                            <input type="text" name="title">
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <label for="" class="text-sm w-24">Block Number  </label>
+                            <input type="text"  name="block_number">
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <label for="" class="text-sm w-24">Building  </label>
+                            <input type="text" name="building">
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <label for="" class="text-sm w-24">Street</label>
+                            <input type="text" name="street">
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <label for="" class="text-sm w-24">Land Mark  </label>
+                            <input type="text" name="land_mark">
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <label for="" class="text-sm w-24">Area  </label>
+                            <input type="text" name="area">
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <label for="" class="text-sm w-24">City  </label>
+                            <input type="text" name="city">
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <label for="" class="text-sm w-32">State  </label>
+                            <select name="state"  class="w-[12.8rem]" id="state">
+                                <option value="">Select a state</option>
+                                {% for state_code, state_name in form.fields.state.choices %}
+                                    <option value="{{ state_code }}">{{ state_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+    
+                </div>    
+                
+                <div class="hidden sm:block mt-5 h-[20rem] md:w-[40rem] lg:w-[50rem]">
+                    <div class="h-full w-full grid grid-cols-2 grid-rows-5">
+                        <div class="col-span-2">
+                            <label for="" class=" w-28 inline-block">Title</label>
+                            <input type="text" class="w-[81%]" name="title" id="">
+                        </div>
+                        <div>
+                            <label for="" class=" w-28 inline-block">Block Number</label>
+                            <input type="text" name="block_number" id="">
+                        </div>
+                        <div class="">
+                            <label for="" class=" w-28 inline-block">Building</label>
+                            <input type="text" name="building" id="">
+                        </div>
+                        <div>
+                            <label for="" class=" w-28 inline-block">Street</label>
+                            <input type="text" name="street" id="">
+                        </div>
+                        <div>
+                            <label for="" class=" w-28 inline-block">Land Mark</label>
+                            <input type="text" name="land_mark" id="">
+                        </div>
+                        <div>
+                            <label for="" class=" w-28 inline-block">Area</label>
+                            <input type="text" name="area" id="">
+                        </div>
+                        <div>
+                            <label for="" class=" w-28 inline-block">City</label>
+                            <input type="text" name="city" id="">
+                        </div>
+                        <div class="col-span-2">
+                            <label for="" class=" w-28 inline-block">State</label>
+                            <select name="state"  class="w-[30%]" id="state">
+                                <option value="" class="">Select a state</option>
+                                {% for state_code, state_name in form.fields.state.choices %}
+                                    <option value="{{ state_code }}">{{ state_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- {% for f in form %}
                     {{ f.label_tag }}
                     {{ f }}
-                {% endfor %}
-                <input type="submit" value="SUBMIT">
+                {% endfor %} -->
+                <input type="submit" class="mt-5 border px-3 py-1 cursor-pointer" value="SUBMIT">
             </form>
         </div>  
     </div>

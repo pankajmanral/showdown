@@ -1,4 +1,5 @@
 from django.db import models
+from autoslug import AutoSlugField
 
 # Create your models here.
 
@@ -25,6 +26,7 @@ tag_choices = (('M',"Men"),
 
 class Product(models.Model):
     product_name = models.CharField(max_length=100)
+    product_slug = AutoSlugField(populate_from='product_name',blank=True,unique=True)
     product_description = models.TextField(default="Product Description")
     product_brand = models.ForeignKey(Brand,on_delete=models.CASCADE,default="Product Brand")
     product_price = models.DecimalField(decimal_places=2,max_digits=10)
