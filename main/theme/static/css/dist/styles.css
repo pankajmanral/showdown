@@ -1486,6 +1486,11 @@ select {
     background-color: rgb(254 226 226 / var(--tw-bg-opacity));
   }
 
+  .sm\:bg-red-300 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+  }
+
   .sm\:px-28 {
     padding-left: 7rem;
     padding-right: 7rem;
@@ -1636,5 +1641,9 @@ select {
   .lg\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .lg\:hover\:font-bold:hover {
+    font-weight: 700;
   }
 }

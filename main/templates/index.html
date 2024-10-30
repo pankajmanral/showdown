@@ -59,9 +59,9 @@
                     <p class="my-6">Rs.{{ i.product_price }}</p>
                     <p>Quantity</p>
                     <div class="border border-black flex justify-between items-center w-32 h-12 text-xl px-3 mt-2 mb-5">
-                        <p class="cursor-pointer">-</p>
-                        <p>2</p>
-                        <p class="cursor-pointer">+</p>
+                        <p class="cursor-pointer decrease">-</p>
+                        <p class="quantityCount">1</p>
+                        <p class="cursor-pointer increase">+</p>
                     </div>
                     <a href="{% url 'add_to_cart' i.id %}"><button id="addCartBtn" data-product-name = "{{ i.product_name }}" data-product-img="{{ i.product_image.url }}" class="border border-black h-14 w-full mb-4">Add to cart</button></a>
                     <a href=""><button class="border border-black h-14 w-full mb-4 bg-black text-white">Buy it now</button></a>
@@ -117,5 +117,30 @@
         </div>
 
     </main>
+
+    <script>
+
+        document.querySelectorAll("#product").forEach(product => {
+            const increaseBtn = product.querySelector(".increase")
+            const decreaseBtn = product.querySelector(".decrease")
+            const quantity = product.querySelector(".quantityCount")
+
+            let currentQuantity = parseInt(quantity.textContent)
+
+            increaseBtn.addEventListener("click",()=>{
+                currentQuantity += 1
+                quantity.textContent = currentQuantity
+            })
+            
+            decreaseBtn.addEventListener("click",()=>{
+                if(currentQuantity > 1){
+                    currentQuantity -= 1
+                    quantity.textContent = currentQuantity
+                }
+            })
+
+        })
+
+    </script>
 
 {% endblock %}

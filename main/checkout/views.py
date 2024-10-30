@@ -1,14 +1,17 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from cart.models import Cart
 from django.views import View
 from account.forms import AddressForm
 from account.models import Address,Customer
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 class Checkout(View):
     def get(self,request):
-        cartProduct = Cart.objects.all()
+        user = request.user
+        user = get_object_or_404(User,username = user)
+        cartProduct = Cart.objects.filter(user = user)
         addressForm = AddressForm()
         return render(request,'checkout/checkout.html',{'form':addressForm,'data':cartProduct})
     

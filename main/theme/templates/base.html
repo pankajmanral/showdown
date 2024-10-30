@@ -54,8 +54,12 @@
 				</div>
 				<ul class="flex w-20 lg:w-80 lg:px-24 justify-evenly items-center">
 					<a href="{% url 'cart' %}"><li class="cursor-pointer text-xl hover:font-bold"><i class="ri-handbag-line"></i></li></a>
-					<a href="{% url 'registration' %}"><li class="cursor-pointer text-xl hidden lg:block hover:font-bold"><i class="ri-user-line"></i></li></a>
-				</ul>
+					{% if request.user.is_authenticated %}
+						<p class="hidden lg:flex text-center lg:hover:font-bold cursor-pointer">Hello {{ request.user }}</p>
+					{% else %}
+						<a href="{% url 'login' %}"><li class="cursor-pointer text-xl hidden lg:block hover:font-bold"><i class="ri-user-line"></i></li></a>
+					{% endif %}
+					</ul>
 			</nav>
 			<div id="sidebar" class="relataive sticky z-50 h-[100vh] w-full md:w-96 bg-white flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
 				<ul class="h-52 flex flex-col gap-6 p-7 font-normal">
