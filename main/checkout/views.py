@@ -13,7 +13,7 @@ class Checkout(View):
         user = get_object_or_404(User,username = user)
         cartProduct = Cart.objects.filter(user = user)
         addressForm = AddressForm()
-        return render(request,'checkout/checkout.html',{'form':addressForm,'data':cartProduct})
+        return render(request,'checkout/checkout.html',{'address':addressForm,'data':cartProduct})
     
     def post(self,request):
         addressForm = AddressForm(request.POST)
@@ -30,10 +30,11 @@ class Checkout(View):
                 land_mark = addressForm.cleaned_data['land_mark'],
                 area = addressForm.cleaned_data['area'],
                 city = addressForm.cleaned_data['city'],
-                state = addressForm.cleaned_data['state']
+                pincode = addressForm.cleaned_data['pincode']
             )
             
             address.save()
 
             # change the redirect 
             return redirect('index')
+

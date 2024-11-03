@@ -4,6 +4,8 @@ from .forms import UserRegistrationForm,CustomerRegistrationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 class Registration(View):
@@ -21,31 +23,38 @@ class Registration(View):
         customerForm = CustomerRegistrationForm(request.POST)
 
         if userForm.is_valid() and customerForm.is_valid():
-            username = userForm.cleaned_data['username']
-            email = userForm.cleaned_data['email']
-            
-            if User.objects.filter(username = username).exists() or User.objects.filter(email = email):
-                messages.success(request,'User already exists, Please login')
-                return redirect('login')
-            
-            first_name = userForm.cleaned_data['first_name']
-            last_name = userForm.cleaned_data['last_name']
-            password = userForm.cleaned_data['password']
 
             user = User.objects.create_user(
-                username = username,
-                first_name = first_name,
-                last_name = last_name,
-                email = email,
-                password = password
+                username =  userForm.cleaned_data['username'],
+                first_name = userForm.cleaned_data['first_name'],
+                last_name = userForm.cleaned_data['last_name'],
+                email = userForm.cleaned_data['email'],
+                password = userForm.cleaned_data['password']
             )
-
+            
             customer = customerForm.save(commit = False)
             customer.user = user
             customer.save()
             login(request,user)
+
+            send_mail(
+                subject = "From ClothHand",
+                message = f"Welcome {user.username}",
+                from_email = settings.EMAIL_HOST_USER,
+                recipient_list = [user.email],
+                fail_silently = False
+            )
+
             return redirect('index')
         
+        context = {
+            'user' : userForm,
+            'customer' : customerForm
+        }
+
+        return render(request,'account/registration.html',context)
+        
+
 class Login(View):
     def get(self,request):
         return render(request,'account/login.html')

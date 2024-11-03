@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    <title>Django Tailwind</title>
+    <title>Showdown</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -32,7 +32,8 @@
 	</style>
 
 	<body>
-		
+
+		{% block navbar %}
 		<nav class="h-40 w-full fixed inset-0 bg-white z-50">
 			<p class="h-10 py-2 text-center">Welcome to {site_name}</p>
 			<hr>
@@ -83,9 +84,9 @@
 			</div>
 		</nav>
 		<hr>
+		{% endblock %}
 		
-		
-		{%block content %} {% endblock %}
+		{% block content %} {% endblock %}
 			
 		
 		<script src="{% static 'D:\Pankaj CLG\showdown\main\static\js\script.js' %}"></script>

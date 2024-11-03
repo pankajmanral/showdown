@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-gender_choice = (('M','Male'),
+gender_choice = [('M','Male'),
                  ('F','Female'),    
-                 ('O','Other'),)
-
+                 ('O','Other')]
 class Customer(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     gender = models.CharField(choices=gender_choice,max_length=1,default=None)
+    phoneNumber = models.CharField(max_length=10,default=9999999999)
     dob = models.DateField(default=None)
 
     def __str__(self):
@@ -63,6 +63,7 @@ class Address(models.Model):
     land_mark  = models.CharField(max_length=30)
     area = models.CharField(max_length=30)
     city = models.CharField(max_length=30)
+    pincode = models.PositiveIntegerField(max_length=6,default=666666,blank=True)
     state = models.CharField(max_length=2,choices=STATE_CHOICES)
 
     def __str__(self):

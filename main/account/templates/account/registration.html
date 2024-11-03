@@ -1,22 +1,39 @@
-{% extends 'base.html' %}
+    {% extends 'base.html' %}
 
-{% block content %}
+    {% block navbar %} {% endblock %}
 
-<div class="mt-40">
-    <form method="POST">
-        {% csrf_token %}
-        {% for u in user %}
-            {{ u.label_tag }}
-            {{ u }}
-            {{ u.errors }}
-        {% endfor %}
-        {% for c in customer %}
-            {{ c.label_tag }}
-            {{ c }}
-            {{ c.errors }}
-        {% endfor %}
-        <input type="submit" value="Register"></input>
-    </form>
-</div>
+    {% block content %}
 
-{% endblock %}
+
+    <div class="h-svh flex justify-center items-center ">
+        <div class="w-[35rem] sm:w-[50rem] flex flex-col items-center justify-center gap-10">
+
+            <div class="flex items-center gap-2">
+                <i class="ri-user-line text-2xl"></i>
+                <h1 class="font-thin text-3xl underline"></i>User Registration</h1>
+            </div>
+
+            <form method="POST" action="" class="w-full flex flex-wrap items-center justify-center gap-3 px-7 py-3">
+                {% csrf_token %}
+                <input type="text" name="first_name" id="" required placeholder="Enter First name" class="h-12 w-72 rounded-md cursor-pointer">
+                <input type="text" name="last_name" id="" required placeholder="Enter last name" class="h-12 w-72 rounded-md cursor-pointer">
+                <input type="text" name="username" id="" required placeholder="Enter Username" class="h-12 w-72 rounded-md cursor-pointer">
+                <input type="text" name="phoneNumber" maxlength="10" required placeholder="Enter Phone Number" id="" class="h-12 w-72 rounded-md cursor-pointer">
+                <input type="text" name="email" id="" required placeholder="Enter email address" class="h-12 w-72 rounded-md cursor-pointer">
+                <input type="text" name="password" id="" required placeholder="Enter password" class="h-12 w-72 rounded-md cursor-pointer">
+                <input type="text" name="confirm_password" id="" required placeholder="Confirm password" class="h-12 w-72 rounded-md cursor-pointer">
+                <input type="date" name="dob" required placeholder="DOB" class="h-12 rounded-md text-black cursor-pointer">
+                <select name="gender" id="" required class="h-12 rounded-md cursor-pointer">
+                    {% for gender_code,gender_name in customer.fields.gender.choices %}
+                        <option value="{{gender_code}}">{{gender_name}}</option>
+                    {% endfor %}
+                </select> 
+                <input type="submit" value="Register" class="bg-black text-white px-5 py-1 rounded-md h-12 w-1/2 cursor-pointer focus:ouline-none focus:border-black">
+            </form>
+
+            <a href="{% url 'login' %}"><button class="underline">Already a Customer</button></a>
+
+        </div>
+    </div>
+
+    {% endblock %}
