@@ -40,5 +40,24 @@ crossBtn.forEach((btn) => {
     btn.addEventListener("click",closeFunction)
 })
 
-// checkout page 
+// user menu
 
+const usermenu = document.querySelector("#usermenu");
+const user = document.querySelector("#user");
+
+user.addEventListener("click", () => {
+    
+    if(usermenu.classList.contains("opacity-0")){
+        usermenu.classList.remove("opacity-0")
+    }
+    else{
+        usermenu.classList.add("opacity-0")
+    }
+
+});
+
+document.addEventListener("click", (event) => {
+    if (!usermenu.contains(event.target) && event.target !== user) {
+        usermenu.classList.add("opacity-0");
+    }
+});

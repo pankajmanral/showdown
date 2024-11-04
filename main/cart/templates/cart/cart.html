@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load grandtotal %}
 
 
 {% block content %}
@@ -78,7 +79,7 @@
         <div class="flex justify-center sm:justify-end">
             <hr>
             <div class="text-center w-60 sm:text-right sm:w-72">
-                <p class="">Estimated total <span class="sm:text-lg sm:ms-3">Rs.</span></p>
+                <p class="">Estimated total <span class="sm:text-lg sm:ms-3">Rs.{{ product|grandTotal }}</span></p>
                 <h6 class="text-xs mt-2">Taxes,discount and shipping calculated at checkout</h6>
                 <a href="{% url 'checkout' %}"><button class="bg-black text-white h-12 w-full mt-5">Check out</button></a>
             </div>

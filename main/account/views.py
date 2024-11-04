@@ -44,7 +44,6 @@ class Registration(View):
                 recipient_list = [user.email],
                 fail_silently = False
             )
-
             return redirect('index')
         
         context = {
@@ -65,6 +64,14 @@ class Login(View):
         user = authenticate(request,username = username,password = password)
         if user : 
             login(request,user)
+
+            send_mail(
+                subject = "From ClothHand",
+                message = f"Welcome back {user.username}",
+                from_email = settings.EMAIL_HOST_USER,
+                recipient_list = [user.email],
+                fail_silently = True
+            )
             return redirect('index')
         else:
             return redirect('login')

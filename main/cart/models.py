@@ -17,16 +17,9 @@ class Cart(models.Model):
 
 
     def __str__(self):
-        return f'{self.cart_product.product_name} | {self.quantity}'
+        return f'{self.user} | {self.cart_product.product_name} | {self.quantity}'
     
     def total_cost(self):
         return self.cart_product.product_price * self.quantity
         
     
-# class FeaturedCart(models.Model):
-#     cart_product = models.ForeignKey(FeaturedProduct,on_delete=models.CASCADE)
-#     quantity = models.PositiveIntegerField(default=1)
-#     added_at = models.DateTimeField(auto_now_add=True)
-
-#     class Meta:
-#         db_table = 'FeaturedCart'

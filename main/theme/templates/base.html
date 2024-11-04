@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 		<!-- remix icon cdn -->
 		<link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+		<!-- js link  -->
 		{% tailwind_css %}
 	</head>
 
@@ -35,7 +36,7 @@
 
 		{% block navbar %}
 		<nav class="h-40 w-full fixed inset-0 bg-white z-50">
-			<p class="h-10 py-2 text-center">Welcome to {site_name}</p>
+			<p class="h-10 py-2 text-center">Welcome to ClothHand</p>
 			<hr>
 			<nav class="h-28 w-full flex items-center justify-between px-1 lg:px-20">
 				<ul class="">
@@ -45,7 +46,7 @@
 					<ul class="hidden lg:flex w-80 justify-around">
 						<li class="cursor-pointer hover:font-bold">
 							<a href="{% url 'all_product' %}">Products</a>
-						</li>
+						</li> 
 						<li class="cursor-pointer hover:font-bold">Contact</li>
 						<li class="cursor-pointer hover:font-bold">About us</li>
 					</ul>
@@ -53,14 +54,33 @@
 				<div>
 					<a href="{% url 'index' %}"><img class="h-16 sm:h-20" src="{% static 'D:\Pankaj CLG\showdown\main\static\img\logo.png' %}" alt=""></a>
 				</div>
-				<ul class="flex w-20 lg:w-80 lg:px-24 justify-evenly items-center">
+				<ul class="flex w-20 lg:w-80 lg:px-20 justify-evenly items-center">
 					<a href="{% url 'cart' %}"><li class="cursor-pointer text-xl hover:font-bold"><i class="ri-handbag-line"></i></li></a>
 					{% if request.user.is_authenticated %}
-						<p class="hidden lg:flex text-center lg:hover:font-bold cursor-pointer">Hello {{ request.user }}</p>
+						<p id="user" class="hidden lg:flex lg:items-center text-center lg:hover:font-bold cursor-pointer ms-5">Hello {{ request.user }}</p>
 					{% else %}
 						<a href="{% url 'login' %}"><li class="cursor-pointer text-xl hidden lg:block hover:font-bold"><i class="ri-user-line"></i></li></a>
 					{% endif %}
+				</ul>
+				<div id="usermenu" class="hidden md:block w-44 fixed top-[22rem] right-32 bg-white pb-5 px-5 rounded-b-lg transform -translate-y-52 opacity-0 transition-opacity duration-300 ease-in-out">
+					<ul class="flex flex-col items-center justify-center gap-5">
+						<a href="" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
+							<li>Profile</li><i class="ri-user-line"></i>
+						</a>
+						<a href="" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
+							<li>Orders</li><i class="ri-shopping-cart-line"></i>
+						</a>
+						<a href="" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
+							<li>Addresses</li><i class="ri-home-2-line"></i>
+						</a>
+						<a href="" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
+							<li>History</li><i class="ri-history-line"></i>
+						</a>
+						<a href="{% url 'logout' %}" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
+							<li>Logout</li><i class="ri-login-circle-line"></i>
+						</a>
 					</ul>
+				</div>
 			</nav>
 			<div id="sidebar" class="relataive sticky z-50 h-[100vh] w-full md:w-96 bg-white flex flex-col justify-between transform -translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
 				<ul class="h-52 flex flex-col gap-6 p-7 font-normal">
@@ -80,15 +100,14 @@
 					<li class="cursor-pointer hover:font-bold">Contact</li>
 					<li class="cursor-pointer hover:font-bold">About us</li>
 				</ul>
-				
 			</div>
 		</nav>
 		<hr>
+
 		{% endblock %}
 		
 		{% block content %} {% endblock %}
 			
-		
 		<script src="{% static 'D:\Pankaj CLG\showdown\main\static\js\script.js' %}"></script>
 
 	</body>
