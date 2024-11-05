@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
 from .forms import UserRegistrationForm,CustomerRegistrationForm
 from django.contrib.auth.models import User
@@ -78,4 +78,42 @@ class Login(View):
         
 def logout_user(request):
     logout(request)
+    return redirect('/')
+
+from . forms import ForgetPasswordForm,OTPForm
+import random
+
+class ForgotPassword(View):
+    def get(self,request):
+        context = {
+            'form':ForgetPasswordForm()
+        }
+        return render(request,'account/form.html',context)
+    
+    def post(self,request): 
+        username = request.POST.get('username')
+        user = get_object_or_404(User,username = username)
+        email = request.POST.get('email')
+        if email == user.email:
+            otp = random.randint(1000,9999)
+            send_mail(
+                subject = "OTP for Reset Password",
+                message = f'{otp} this is your otp for forgot password request',
+                from_email = settings.EMAIL_HOST_USER,
+                recipient_list = [user.email],
+                fail_silently = True
+            )
+
+            print('\n\n\n\n\n',otp,'\n\n\n\n')
+            request.session['otp'] = int(otp)
+            context = {
+                'form' : OTPForm(),
+                'form_action' : '/account/verify-otp/'
+            }
+            return render(request,'account/form.html',context)
+        else:
+            return redirect('index')
+        
+
+def verifyOTP(request):
     return redirect('/')

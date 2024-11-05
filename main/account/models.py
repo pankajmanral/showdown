@@ -63,7 +63,7 @@ class Address(models.Model):
     land_mark  = models.CharField(max_length=30)
     area = models.CharField(max_length=30)
     city = models.CharField(max_length=30)
-    pincode = models.PositiveIntegerField(max_length=6,default=666666,blank=True)
+    pincode = models.PositiveIntegerField(default=666666,blank=True)
     state = models.CharField(max_length=2,choices=STATE_CHOICES)
 
     def __str__(self):
