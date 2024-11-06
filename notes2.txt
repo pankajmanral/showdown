@@ -1,0 +1,153 @@
+I have a button reset password
+
+when I click on the button a get request has been send to the backend 
+
+class ForgotPassword(View):
+    def get(self,request):
+        context = {
+            'form' : ForgetPasswordForm()
+        }
+        return render(request,'account/form.html',context)
+
+    def post(self,request):
+        username = request.POST.get('username')
+        user = get_object_or_404(User,username = username)
+        email = request.POST.get('email')
+        if email == user.email:
+            # generate the otp here
+            otp = random.randint(1000,9999)
+            send_mail(
+                subject = '',
+                message = '',
+                from_email = '',
+                recipent_list = []
+            )
+            request.session['otp'] = int(otp)
+            request.session['username'] = user.username
+            context = {
+                'form' : OTPForm(),
+                'form_action' : '/account/verify-otp/'
+            }
+
+        else:
+            return redirect('index')
+
+def verifyOTP(request):
+    if request.method == "POST":
+        otp = int(request.session.get('otp'))
+        username = request.session.get('username')
+        enteredOTP = int(request.POST.get('otp'))
+        if otp == enteredOTP:
+            context = {
+                'form' : ResetPasswordForm(),
+                'form_action' : '/account/reset-password/'
+            }
+            return render(request,'account/form.html',context)
+    else:
+        return redirect('index')
+
+def resetPassword(request):
+    if request.method == "POST":
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        username = request.session.get('username')
+        if password == confirm_password:
+            user = get_object_or_404(User,username = username)
+            user.setPassword(password)
+            user.save()
+            return redirect('login')
+        else:
+            context = {
+                'form' : ResetPasswordForm(request.POST),
+                'form_action' : '/account/reset-password/' 
+            }
+    else:
+        return redirect('index')
+
+
+<form action="" method="POST" class="flex flex-wrap w-full">
+            {% csrf_token %}
+
+            <!-- User Personal Information -->
+            <div class="w-[40rem]">
+                <h1 class="text-2xl font-bold">User Personal Information</h1>
+            </div>
+            
+            <div class="inline mt-2 ms-2">
+                <label for="first_name">First Name</label>
+                <h1>{{ user.first_name }}</h1>
+            </div>
+            
+            <!-- Display Last Name as Static Text -->
+            <div class="inline mt-2 ms-2">
+                <label for="last_name">Last Name</label>
+                <h1>{{ user.last_name }}</h1>
+            </div>
+
+            <!-- Display Username as Static Text -->
+            <div class="inline mt-2 ms-2">
+                <label for="username">Username</label>
+                <h1>{{ user.username }}</h1>
+            </div>
+
+            <!-- Display Email as Static Text -->
+            <div class="inline mt-2 ms-2">
+                <label for="email">Email</label>
+                <h1>{{ user.email }}</h1>
+            </div>
+
+            <!-- Display Phone Number as Static Text -->
+            <div class="inline mt-2 ms-2">
+                <label for="phoneNumber">Phone Number</label>
+                <h1>{{ form.phoneNumber.value }}</h1>
+            </div>
+
+            <!-- Display Date of Birth as Static Text -->
+            <div class="inline mt-2 ms-2">
+                <label for="dob">Date of Birth</label>
+                <h1>{{ form.dob.value }}</h1>
+            </div>
+
+            <!-- User Address Information -->
+            <div class="w-[40rem]">
+                <h1 class="text-2xl font-bold">User Address Information</h1>
+            </div>
+            
+            <!-- Display Title as Static Text -->
+            <div class="inline mt-2 ms-2">
+                <label for="title">Title</label>
+                <h1>{{ form.title.value }}</h1>
+            </div>
+            <div class="inline mt-2 ms-2">
+                <label for="block_number">Block Number</label>
+                <h1>{{ form.block_number.value }}</h1>
+            </div>
+
+            <div class="inline mt-2 ms-2">
+                <label for="building">Building</label>
+                <h1>{{ form.building.value }}</h1>
+            </div>
+
+            <div class="inline mt-2 ms-2">
+                <label for="street">Street</label>
+                <h1>{{ form.street.value }}</h1>
+            </div>
+
+            <!-- Display Landmark as Static Text -->
+            <div class="inline mt-2 ms-2">
+                <label for="land_mark">Landmark</label>
+                <h1>{{ form.land_mark.value }}</h1>
+            </div>
+
+            <!-- Display Area as Static Text -->
+            <div class="inline mt-2 ms-2">
+                <label for="area">Area</label>
+                <h1>{{ form.area.value }}</h1>
+            </div>
+
+            <!-- Display Pincode as Static Text -->
+            <div class="inline mt-2">
+                <label for="pincode">Pincode</label>
+                <h1>{{ form.pincode.value }}</h1>
+            </div>
+        </form>

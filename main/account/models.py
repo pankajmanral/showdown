@@ -7,7 +7,7 @@ gender_choice = [('M','Male'),
                  ('F','Female'),    
                  ('O','Other')]
 class Customer(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     profilePhoto = models.ImageField(upload_to='user/',default=r'\user\WhatsApp Image 2024-10-13 at 22.40.48_3d088325.jpg')
     gender = models.CharField(choices=gender_choice,max_length=1,default=None)
     phoneNumber = models.CharField(max_length=10,default=9999999999)
@@ -58,7 +58,7 @@ STATE_CHOICES = [
 class Address(models.Model):
     user = models.ForeignKey(Customer,on_delete=models.CASCADE)
     title = models.CharField(max_length=15)
-    block_number = models.CharField(max_length=5)
+    block_number = models.CharField(max_length=10)
     building = models.CharField(max_length=30)
     street = models.CharField(max_length=30)
     land_mark  = models.CharField(max_length=30)

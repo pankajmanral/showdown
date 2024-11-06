@@ -26,7 +26,7 @@
                 <div class="py-2">
                     <div class="p-2 grid grid-cols-3 grid-rows-2 sm:grid-cols-4 sm:grid-rows-1">
                         <div class="block sm:hidden h-36 w-24 row-span-2">
-                            <img class="h-full w-full" src="{{ i.cart_product.product_image.url }}" alt="">
+                            <a href="{% url 'cartDetail' i.cart_product.id %}"><img class="h-full w-full" src="{{ i.cart_product.product_image.url }}" alt=""></a>
                         </div>
                         <div class="block sm:hidden ms-3">
                             <h1 class="text-[0.8rem]">{{ i.cart_product.product_name }}</h1>
@@ -35,7 +35,7 @@
                         <!-- the together div is for screen size above sm -->
                         <div class="hidden sm:flex sm:col-span-2">
                             <div class="h-36 w-24 row-span-2">
-                                <img class="h-full w-full" src="{{ i.cart_product.product_image.url }}" alt="">
+                                <a href="{% url 'cartDetail' i.cart_product.id %}"><img class="h-full w-full" src="{{ i.cart_product.product_image.url }}" alt=""></a>
                             </div>
                             <div class="ms-3">
                                 <h1 class="text-md">{{ i.cart_product.product_name }}</h1>

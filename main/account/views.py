@@ -37,13 +37,13 @@ class Registration(View):
             customer.save()
             login(request,user)
 
-            send_mail(
-                subject = "From ClothHand",
-                message = f"Welcome {user.username}",
-                from_email = settings.EMAIL_HOST_USER,
-                recipient_list = [user.email],
-                fail_silently = False
-            )
+            # send_mail(
+            #     subject = "From ClothHand",
+            #     message = f"Welcome {user.username}",
+            #     from_email = settings.EMAIL_HOST_USER,
+            #     recipient_list = [user.email],
+            #     fail_silently = False
+            # )
             return redirect('index')
         
         context = {
@@ -65,22 +65,22 @@ class Login(View):
         if user : 
             login(request,user)
 
-            send_mail(
-                subject = "From ClothHand",
-                message = f"Welcome back {user.username}",
-                from_email = settings.EMAIL_HOST_USER,
-                recipient_list = [user.email],
-                fail_silently = True
-            )
+            # send_mail(
+            #     subject = "From ClothHand",
+            #     message = f"Welcome back {user.username}",
+            #     from_email = settings.EMAIL_HOST_USER,
+            #     recipient_list = [user.email],
+            #     fail_silently = True
+            # )
             return redirect('index')
         else:
             return redirect('login')
         
 def logout_user(request):
     logout(request)
-    return redirect('/')
+    return redirect('login')
 
-from . forms import ForgetPasswordForm,OTPForm
+from . forms import ForgetPasswordForm,OTPForm,ResetPasswordForm
 import random
 
 class ForgotPassword(View):
@@ -96,24 +96,69 @@ class ForgotPassword(View):
         email = request.POST.get('email')
         if email == user.email:
             otp = random.randint(1000,9999)
-            send_mail(
-                subject = "OTP for Reset Password",
-                message = f'{otp} this is your otp for forgot password request',
-                from_email = settings.EMAIL_HOST_USER,
-                recipient_list = [user.email],
-                fail_silently = True
-            )
+            # send_mail(
+            #     subject = "OTP for Reset Password",
+            #     message = f'{otp} this is your otp for forgot password request',
+            #     from_email = settings.EMAIL_HOST_USER,
+            #     recipient_list = [user.email],
+            #     fail_silently = True
+            # )
 
             print('\n\n\n\n\n',otp,'\n\n\n\n')
             request.session['otp'] = int(otp)
+            request.session['username'] = user.username
             context = {
                 'form' : OTPForm(),
-                'form_action' : '/account/verify-otp/'
+                'form_action' : '/account/verify-otp/',
+                'otp' : 'verify-otp'
             }
             return render(request,'account/form.html',context)
         else:
-            return redirect('index')
+            return redirect('login')
         
 
 def verifyOTP(request):
-    return redirect('/')
+    if request.method == "POST":
+        otp = int(request.session.get('otp'))
+        username = request.session.get('username')
+        form_data = int(request.POST.get('otp'))   #user entered otp 
+        if otp == form_data:
+            context = {
+                'form' : ResetPasswordForm(),
+                'form_name' : f'Enter new password for {username}',
+                'form_action' : '/account/reset-password/',
+                
+            }
+            return render(request,'account/form.html',context)
+    else:
+        return redirect('index')
+    
+def resetPassword(request):
+    if request.method == "POST":
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        username = request.session.get('username')
+        if password == confirm_password:
+            user = get_object_or_404(User,username=username)
+            user.set_password(password)
+            user.save()
+
+            # send_mail(
+            #     subject = "Password Reset Complete",
+            #     message = 'Your password has been successfully reset. You can now login with your new password',
+            #     from_email = settings.EMAIL_HOST_USER,
+            #     recipient_list = [user.email],
+            #     fail_silently = True
+            # )
+
+            return redirect('login')
+        else:
+            context = {
+                'form' : ResetPasswordForm(data = request.POST),
+                'form_name' : f'Password and Confirm Password did not matched for {username}',
+                'form_action' : '/account/reset-password/',
+                
+            }
+            return render(request,'account/form.html',context)
+    else:
+        return redirect('index')

@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 def cart(request):  
     # find the user using the username from the user table 
     user = get_object_or_404(User,username = request.user)
-
     # filter the cart based by comparing the user 
     cartProduct = Cart.objects.filter(user = user)
     return render(request,'cart/cart.html',{'product':cartProduct})
@@ -41,3 +40,8 @@ def delete_product(request,id):
     product = get_object_or_404(Cart,id=id)
     product.delete()
     return redirect('cart')
+
+def getDetail(request,id):
+    details = get_object_or_404(Product,id = id)
+    suggestedProduct = Product.objects.filter(tag=details.tag).exclude(id=id)[:4]
+    return render(request,'product/product_details.html',{'detail':details,'data':suggestedProduct})

@@ -1,3 +1,9 @@
 python manage.py runserver 0.0.0.0:8000 - to run on localhost
 python manage.py tailwind start - to start the tailwind
 python manage.py runserver                                                                      
+
+
+uncomment the mail in the account login view
+uncomment the mail in the account registration view
+uncomment the mail in the account forgotpassword view
+uncomment the mail in the account resetpassword view

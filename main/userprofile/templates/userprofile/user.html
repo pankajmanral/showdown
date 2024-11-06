@@ -2,92 +2,89 @@
 
 {% block content %}
 
-<div class="flex justify-center items-center">
-    <div class="border border-black w-[40rem] px-5">
-        <form action="" method="POST" class="flex flex-wrap w-full">
+<div class="flex h-[75%] justify-center items-center">
+    <div class="w-[25rem] sm:w-[40rem]">
+        <form action="" class="flex flex-col gap-2 px-7 sm:px-3 py-2">
             {% csrf_token %}
-
-            <!-- User Personal Information -->
             <div class="w-[40rem]">
                 <h1 class="text-2xl font-bold">User Personal Information</h1>
             </div>
+            <div class="hidden sm:flex justify-between">
+                <div class="flex gap-2">
+                    <label for="" class="font-bold">First Name -</label>
+                    <h1 class="">{{ user.first_name }}</h1>
+                </div>
+                <div class="flex gap-2">
+                    <label for="" class="font-bold">Last Name -</label>
+                    <h1 class="">{{ user.last_name }}</h1>
+                </div>
+            </div>
+
+            <div class="flex sm:hidden gap-2">
+                <label for="" class="font-bold">First Name -</label>
+                <h1 class="">{{ user.first_name }}</h1>
+            </div>
+            <div class="flex sm:hidden gap-2">
+                <label for="" class="font-bold">Last Name -</label>
+                <h1 class="">{{ user.last_name }}</h1>
+            </div>
             
-            <!-- Display First Name as Static Text -->
-            <div class="inline mt-2 ms-2">
-                <label for="first_name">First Name</label>
-                <h1>{{ user.first_name }}</h1>
+            <div class="hidden sm:flex justify-between">
+                <div class="flex gap-2">
+                    <label for="" class="font-bold">Username -</label>
+                    <h1 class="">{{ user.username }}</h1>
+                </div>
+                <div class="flex gap-2">
+                    <label for="" class="font-bold">Email -</label>
+                    <h1 class="">{{ user.email }}</h1>
+                </div>
             </div>
-            
-            <!-- Display Last Name as Static Text -->
-            <div class="inline mt-2 ms-2">
-                <label for="last_name">Last Name</label>
-                <h1>{{ user.last_name }}</h1>
+            <div class="flex sm:hidden gap-2">
+                <label for="" class="font-bold">Username -</label>
+                <h1 class="">{{ user.username }}</h1>
             </div>
-
-            <!-- Display Username as Static Text -->
-            <div class="inline mt-2 ms-2">
-                <label for="username">Username</label>
-                <h1>{{ user.username }}</h1>
+            <div class="flex sm:hidden gap-2">
+                <label for="" class="font-bold">Email -</label>
+                <h1 class="">{{ user.email }}</h1>
             </div>
-
-            <!-- Display Email as Static Text -->
-            <div class="inline mt-2 ms-2">
-                <label for="email">Email</label>
-                <h1>{{ user.email }}</h1>
-            </div>
-
-            <!-- Display Phone Number as Static Text -->
-            <div class="inline mt-2 ms-2">
-                <label for="phoneNumber">Phone Number</label>
+            <div class="flex gap-2">
+                <label for="" class="font-bold">Phone Number -</label>
                 <h1>{{ form.phoneNumber.value }}</h1>
             </div>
-
-            <!-- Display Date of Birth as Static Text -->
-            <div class="inline mt-2 ms-2">
-                <label for="dob">Date of Birth</label>
+            <div class="flex gap-2">
+                <label for="" class="font-bold">Date of Birth -</label>
                 <h1>{{ form.dob.value }}</h1>
             </div>
-
-            <!-- User Address Information -->
+            <hr>
             <div class="w-[40rem]">
                 <h1 class="text-2xl font-bold">User Address Information</h1>
             </div>
-            
-            <!-- Display Title as Static Text -->
-            <div class="inline mt-2 ms-2">
-                <label for="title">Title</label>
+            <div class="flex gap-2">
+                <label for="" class="font-bold">Title - </label>
                 <h1>{{ form.title.value }}</h1>
             </div>
-            <div class="inline mt-2 ms-2">
-                <label for="block_number">Block Number</label>
+            <div class="flex gap-2">
+                <label for="" class="font-bold">Block Number - </label>
                 <h1>{{ form.block_number.value }}</h1>
             </div>
-
-            <div class="inline mt-2 ms-2">
-                <label for="building">Building</label>
+            <div class="flex gap-2">
+                <label for="" class="font-bold">Building - </label>
                 <h1>{{ form.building.value }}</h1>
             </div>
-
-            <div class="inline mt-2 ms-2">
-                <label for="street">Street</label>
+            <div class="flex gap-2">
+                <label for="" class="font-bold">Street - </label>
                 <h1>{{ form.street.value }}</h1>
             </div>
-
-            <!-- Display Landmark as Static Text -->
-            <div class="inline mt-2 ms-2">
-                <label for="land_mark">Landmark</label>
+            <div class="flex gap-2">
+                <label for="" class="font-bold">Land Mark - </label>
                 <h1>{{ form.land_mark.value }}</h1>
             </div>
-
-            <!-- Display Area as Static Text -->
-            <div class="inline mt-2 ms-2">
-                <label for="area">Area</label>
+            <div class="flex gap-2">
+                <label for="" class="font-bold">Area - </label>
                 <h1>{{ form.area.value }}</h1>
             </div>
-
-            <!-- Display Pincode as Static Text -->
-            <div class="inline mt-2">
-                <label for="pincode">Pincode</label>
+            <div class="flex gap-2">
+                <label for="" class="font-bold">Pincode - </label>
                 <h1>{{ form.pincode.value }}</h1>
             </div>
         </form>

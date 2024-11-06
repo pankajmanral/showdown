@@ -10,10 +10,17 @@
         </div>
         <form method="POST" action="{{ form_action }}" class="flex flex-col items-center gap-2">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Enter username" class="w-72 h-12 rounded-md">
-            <input type="email" name="email" placeholder="Enter email" class="w-72 h-12 rounded-md">
+            {% if form %}
+                {{ form.as_p }}
+            {% else %}
+                <input type="text" name="username" placeholder="Enter username" class="w-72 h-12 rounded-md">
+                <input type="email" name="email" placeholder="Enter email" class="w-72 h-12 rounded-md">
+            {% endif %}
             <input type="submit" value="Submit" class="bg-black text-white px-5 py-1 rounded-md h-12 w-1/2 cursor-pointer focus:ouline-none focus:border-black">
         </form>
+        {% if otp == 'verify-otp' %}
+            <p><button type="button" onclick="window.location.reload();">Resend OTP</button></p>
+        {% endif %}
     </div>
 
 {% endblock %}
