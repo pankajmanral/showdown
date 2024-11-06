@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <div id="cartDropdown" class="fixed top-40 right-0 bg-white h-[21rem] w-full sm:w-96 transform -translate-y-full transition-transform duration-300 ease-in-out z-30">
+    <div id="cartDropdown" class="fixed top-40 right-5 bg-white h-[21rem] w-full sm:w-96 transform opacity-0 -translate-y-full transition-transform duration-300 ease-in-out z-30">
         <div>
             <div class="">
                 <div class="flex justify-between items-center px-5">
@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div id="productDetail" class="mt-32 flex flex-col w-full sm:flex-row md:justify-center px-5 pt-9">
+    <div id="productDetail" class="flex flex-col w-full sm:flex-row md:justify-center px-5 pt-9">
         <div class="flex w-full md:w-96 justify-center">
             <img class="h-80 sm:h-[27rem] md:w-80 cursor-pointer sticky top-48" src="{{ detail.product_image.url }}" alt="">
         </div>

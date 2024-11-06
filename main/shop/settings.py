@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'cart.apps.CartConfig',
     'account',
-    'checkout'
+    'checkout',
+    'userprofile'
 ]
 
 TAILWIND_APP_NAME = 'theme'

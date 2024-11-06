@@ -10,7 +10,7 @@
             <div class="grid grid-cols-2 lg:grid-cols-4 mt-4 gap-2">
                 {% for i in data %}
                 <div class="mt-5">
-                    <a href="{% url 'product_detail' i.id %}"><img class="bg-contain bg-center" src="{{ i.product_image.url }}" alt=""></a>
+                    <a href="{% url 'product_detail' i.id %}"><img class="bg-contain bg-center rounded-3xl" src="{{ i.product_image.url }}" alt=""></a>
                     <p class="mt-1 text-xs sm:text-sm bg-black rounded-3xl w-fit text-white px-3">{{ i.product_brand }}</p>
                     <h1 class="mb-2">{{ i.product_name }}</h1>
                     <h1 class="mb-2">RS {{ i.product_price }}</h1>

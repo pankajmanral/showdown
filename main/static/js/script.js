@@ -23,7 +23,7 @@ addCartBtn.forEach((button) =>{
         document.querySelector("#dropdownName").textContent = productName
         document.querySelector("#dropdownImage").src = productImage
         
-        cartDropdown.classList.remove("-translate-y-full")
+        cartDropdown.classList.remove("-translate-y-full","opacity-0")
 
         setTimeout(()=>{
             closeFunction()

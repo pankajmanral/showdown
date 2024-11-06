@@ -2,12 +2,13 @@
 {% load static %}
 {% load grandtotal %}
 
+{% block navbar %} {% endblock %}
 
 {% block content %}
 
-    <div class="mt-40 md:px-5 lg:px-28 pb-10">
+    <div class="md:px-5 lg:px-28 pb-10">
         <hr>
-        <div class="p-5">
+        <div class="p-5 sticky inset-0 bg-white">
             <div class="flex justify-between items-end">
                 <h1 class="text-2xl">Your cart</h1>
                 <a href="{% url 'all_product' %}"><p class="underline text-sm font-thin tracking-wide">Continue shopping</p></a>

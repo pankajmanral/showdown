@@ -8,6 +8,7 @@ gender_choice = [('M','Male'),
                  ('O','Other')]
 class Customer(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    profilePhoto = models.ImageField(upload_to='user/',default=r'\user\WhatsApp Image 2024-10-13 at 22.40.48_3d088325.jpg')
     gender = models.CharField(choices=gender_choice,max_length=1,default=None)
     phoneNumber = models.CharField(max_length=10,default=9999999999)
     dob = models.DateField(default=None)
