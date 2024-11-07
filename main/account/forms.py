@@ -31,7 +31,18 @@ class AddressForm(ModelForm):
     class Meta:
         model = Address
         exclude = ['user']
-
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Address Title','class':'h-12 w-80 rounded-md'}),
+            'block_number': forms.TextInput(attrs={'placeholder': 'Block Number','class':'h-12 w-80 rounded-md'}),
+            'building': forms.TextInput(attrs={'placeholder': 'Building Name','class':'h-12 w-80 rounded-md'}),
+            'street': forms.TextInput(attrs={'placeholder': 'Street','class':'h-12 w-80 rounded-md'}),
+            'land_mark': forms.TextInput(attrs={'placeholder': 'Landmark','class':'h-12 w-80 rounded-md'}),
+            'area': forms.TextInput(attrs={'placeholder': 'Area','class':'h-12 w-80 rounded-md'}),
+            'city': forms.TextInput(attrs={'placeholder': 'City','class':'h-12 w-80 rounded-md'}),
+            'pincode': forms.TextInput(attrs={'placeholder': 'Postal Code','class':'h-12 w-80 rounded-md'}),
+            'state': forms.Select(attrs={'placeholder': 'State','class':'h-12 w-full rounded-md'}),
+        }
+        
 class ForgetPasswordForm(forms.Form):
     username = forms.CharField(max_length=20)
     email = forms.CharField(max_length=30,widget=forms.EmailInput)

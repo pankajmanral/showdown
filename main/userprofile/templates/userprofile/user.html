@@ -1,93 +1,98 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
-
-<div class="flex h-[75%] justify-center items-center">
-    <div class="w-[25rem] sm:w-[40rem]">
-        <form action="" class="flex flex-col gap-2 px-7 sm:px-3 py-2">
-            {% csrf_token %}
-            <div class="w-[40rem]">
-                <h1 class="text-2xl font-bold">User Personal Information</h1>
-            </div>
-            <div class="hidden sm:flex justify-between">
-                <div class="flex gap-2">
-                    <label for="" class="font-bold">First Name -</label>
-                    <h1 class="">{{ user.first_name }}</h1>
-                </div>
-                <div class="flex gap-2">
-                    <label for="" class="font-bold">Last Name -</label>
-                    <h1 class="">{{ user.last_name }}</h1>
-                </div>
-            </div>
-
-            <div class="flex sm:hidden gap-2">
+<div class="block lg:flex">
+    <div class="flex flex-col gap-2 px-7 sm:px-7 py-2 lg:w-1/2">
+        <div class="w-[20rem] md:w-[40rem] mb-2">
+            <h1 class="text-2xl font-bold">User Personal Information</h1>
+        </div>
+        <div class="hidden sm:flex justify-between">
+            <div class="flex gap-2">
                 <label for="" class="font-bold">First Name -</label>
                 <h1 class="">{{ user.first_name }}</h1>
             </div>
-            <div class="flex sm:hidden gap-2">
+            <div class="flex gap-2">
                 <label for="" class="font-bold">Last Name -</label>
                 <h1 class="">{{ user.last_name }}</h1>
             </div>
-            
-            <div class="hidden sm:flex justify-between">
-                <div class="flex gap-2">
-                    <label for="" class="font-bold">Username -</label>
-                    <h1 class="">{{ user.username }}</h1>
-                </div>
-                <div class="flex gap-2">
-                    <label for="" class="font-bold">Email -</label>
-                    <h1 class="">{{ user.email }}</h1>
-                </div>
-            </div>
-            <div class="flex sm:hidden gap-2">
+        </div>
+
+        <div class="flex sm:hidden gap-2">
+            <label for="" class="font-bold">First Name -</label>
+            <h1 class="">{{ user.first_name }}</h1>
+        </div>
+        <div class="flex sm:hidden gap-2">
+            <label for="" class="font-bold">Last Name -</label>
+            <h1 class="">{{ user.last_name }}</h1>
+        </div>
+        
+        <div class="hidden sm:flex justify-between">
+            <div class="flex gap-2">
                 <label for="" class="font-bold">Username -</label>
                 <h1 class="">{{ user.username }}</h1>
             </div>
-            <div class="flex sm:hidden gap-2">
+            <div class="flex gap-2">
                 <label for="" class="font-bold">Email -</label>
                 <h1 class="">{{ user.email }}</h1>
             </div>
-            <div class="flex gap-2">
-                <label for="" class="font-bold">Phone Number -</label>
-                <h1>{{ form.phoneNumber.value }}</h1>
+        </div>
+        <div class="flex sm:hidden gap-2">
+            <label for="" class="font-bold">Username -</label>
+            <h1 class="">{{ user.username }}</h1>
+        </div>
+        <div class="flex sm:hidden gap-2">
+            <label for="" class="font-bold">Email -</label>
+            <h1 class="">{{ user.email }}</h1>
+        </div>
+        <div class="flex gap-2">
+            <label for="" class="font-bold">Phone Number -</label>
+            <h1>{{ form.phoneNumber.value }}</h1>
+        </div>
+        <div class="flex gap-2">
+            <label for="" class="font-bold">Date of Birth -</label>
+            <h1>{{ form.dob.value }}</h1>
+        </div>
+        <hr>
+        <div class="w-[20rem] md:w-[40rem]">
+            <h1 class="text-2xl font-bold mb-2">User Address Information</h1>
+        </div>
+
+        <form action="" method="POST" class="flex flex-wrap justify-center">
+            <div class="flex flex-wrap justify-between gap-2 px-7">
+                {% csrf_token %}
+                {{ addressForm.title }}
+                {{ addressForm.block_number }}
+                {{ addressForm.building }}
+                {{ addressForm.street }}
+                {{ addressForm.land_mark }}
+                {{ addressForm.area }}
+                {{ addressForm.city }}
+                {{ addressForm.pincode }}
+                {{ addressForm.state }}
             </div>
-            <div class="flex gap-2">
-                <label for="" class="font-bold">Date of Birth -</label>
-                <h1>{{ form.dob.value }}</h1>
-            </div>
-            <hr>
-            <div class="w-[40rem]">
-                <h1 class="text-2xl font-bold">User Address Information</h1>
-            </div>
-            <div class="flex gap-2">
-                <label for="" class="font-bold">Title - </label>
-                <h1>{{ form.title.value }}</h1>
-            </div>
-            <div class="flex gap-2">
-                <label for="" class="font-bold">Block Number - </label>
-                <h1>{{ form.block_number.value }}</h1>
-            </div>
-            <div class="flex gap-2">
-                <label for="" class="font-bold">Building - </label>
-                <h1>{{ form.building.value }}</h1>
-            </div>
-            <div class="flex gap-2">
-                <label for="" class="font-bold">Street - </label>
-                <h1>{{ form.street.value }}</h1>
-            </div>
-            <div class="flex gap-2">
-                <label for="" class="font-bold">Land Mark - </label>
-                <h1>{{ form.land_mark.value }}</h1>
-            </div>
-            <div class="flex gap-2">
-                <label for="" class="font-bold">Area - </label>
-                <h1>{{ form.area.value }}</h1>
-            </div>
-            <div class="flex gap-2">
-                <label for="" class="font-bold">Pincode - </label>
-                <h1>{{ form.pincode.value }}</h1>
-            </div>
+            <input type="submit" value="Save Address" class=" mt-2 bg-black text-white px-3 py-1 rounded-md h-12 w-32 sm:w-1/4 cursor-pointer focus:ouline-none focus:border-black">
         </form>
+    </div>
+    <div class="px-7 py-2 mt-5 lg:w-1/2 lg:pb-14 h-[36rem] relative sm:fixed right-0 overflow-y-scroll border-l">
+        <h1 class="font-bold">Saved Addresses</h1>
+        <div class="flex flex-wrap justify-start gap-5">
+            {% for i in detail %}
+            <div class="w-full lg:w-[21rem] rounded-2xl">
+                <div class="">
+                    <h1 class="font-bold bg-gray-200 rounded-t-2xl p-2">{{ i.title }}</h1>
+                    <p class="px-2">{{ i.block_number }} - {{ i.building }}</p>
+                    <p class="px-2">{{ i.street }}, {{ i.land_mark }}</p>
+                    <p class="px-2">{{ i.area }}, {{ i.city }}</p>
+                    <p class="px-2">{{ i.pincode }}</p>
+                    <p class="px-2">{{ i.state }}</p>
+                </div>
+                <div class="flex justify-start gap-2 mt-2 bg-gray-100 rounded-b-2xl p-2">
+                    <button class="border border-black px-3 rounded-lg">Select</button>
+                    <button class="border border-black px-3 rounded-lg"><i class="ri-edit-box-line"></i></button>
+                    <button class="border border-black px-3 rounded-lg"><i class="ri-delete-bin-5-line"></i></button>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
     </div>
 </div>
 
