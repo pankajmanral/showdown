@@ -1,7 +1,7 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <div class="block lg:flex">
-    <div class="flex flex-col gap-2 px-7 sm:px-7 py-2 lg:w-1/2">
+    <div class="flex flex-col gap-2 px-7 sm:px-7 py-2 lg:w-3/4">
         <div class="w-[20rem] md:w-[40rem] mb-2">
             <h1 class="text-2xl font-bold">User Personal Information</h1>
         </div>
@@ -56,7 +56,7 @@
             <h1 class="text-2xl font-bold mb-2">User Address Information</h1>
         </div>
 
-        <form action="" method="POST" class="flex flex-wrap justify-center">
+        <form action="" id="addressForm" method="POST" class="flex flex-col flex-wrap justify-center items-center">
             <div class="flex flex-wrap justify-between gap-2 px-7">
                 {% csrf_token %}
                 {{ addressForm.title }}
@@ -72,23 +72,23 @@
             <input type="submit" value="Save Address" class=" mt-2 bg-black text-white px-3 py-1 rounded-md h-12 w-32 sm:w-1/4 cursor-pointer focus:ouline-none focus:border-black">
         </form>
     </div>
-    <div class="px-7 py-2 mt-5 lg:w-1/2 lg:pb-14 h-[36rem] relative sm:fixed right-0 overflow-y-scroll border-l">
-        <h1 class="font-bold">Saved Addresses</h1>
+    <div class="px-7 py-2 mt-5 lg:w-1/4 lg:pb-14 h-[36rem] relative sm:fixed right-0 overflow-y-scroll border-l">
+        <h1 class="font-bold mb-5">Saved Addresses</h1>
         <div class="flex flex-wrap justify-start gap-5">
             {% for i in detail %}
             <div class="w-full lg:w-[21rem] rounded-2xl">
                 <div class="">
-                    <h1 class="font-bold bg-gray-200 rounded-t-2xl p-2">{{ i.title }}</h1>
+                    <h1 class="font-bold rounded-t-2xl p-2">{{ i.title }}</h1>
+                    <hr>
                     <p class="px-2">{{ i.block_number }} - {{ i.building }}</p>
                     <p class="px-2">{{ i.street }}, {{ i.land_mark }}</p>
                     <p class="px-2">{{ i.area }}, {{ i.city }}</p>
                     <p class="px-2">{{ i.pincode }}</p>
                     <p class="px-2">{{ i.state }}</p>
                 </div>
-                <div class="flex justify-start gap-2 mt-2 bg-gray-100 rounded-b-2xl p-2">
-                    <button class="border border-black px-3 rounded-lg">Select</button>
-                    <button class="border border-black px-3 rounded-lg"><i class="ri-edit-box-line"></i></button>
-                    <button class="border border-black px-3 rounded-lg"><i class="ri-delete-bin-5-line"></i></button>
+                <div class="flex justify-between gap-2 mt-2 rounded-b-2xl p-2">
+                    <a id="" href="{% url 'editAddress' i.id %}"><button class="border border-black px-5 rounded-lg"><i class="ri-edit-box-line"></i></button></a>
+                    <a href="{% url 'deleteAddress' i.id %}"><button class="border border-black px-5 rounded-lg"><i class="ri-delete-bin-5-line"></i></button></a>
                 </div>
             </div>
         {% endfor %}
@@ -97,3 +97,4 @@
 </div>
 
 {% endblock %}
+

@@ -4,7 +4,6 @@ from account.models import Customer
 
 def index(request):
     product = Product.objects.filter(featured_product = True)
-    print(product)
     return render(request,'index.html',{'data':product})
 
 def profilePhoto(request):

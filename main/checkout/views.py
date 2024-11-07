@@ -11,9 +11,11 @@ class Checkout(View):
     def get(self,request):
         user = request.user
         user = get_object_or_404(User,username = user)
+        customer = get_object_or_404(Customer,user=user)
+        customerAddress = Address.objects.filter(user = customer)
         cartProduct = Cart.objects.filter(user = user)
         addressForm = AddressForm()
-        return render(request,'checkout/checkout.html',{'address':addressForm,'data':cartProduct})
+        return render(request,'checkout/checkout.html',{'address':addressForm,'data':cartProduct,'displayAddress':customerAddress})
     
     def post(self,request):
         addressForm = AddressForm(request.POST)
@@ -37,4 +39,3 @@ class Checkout(View):
 
             # change the redirect 
             return redirect('index')
-

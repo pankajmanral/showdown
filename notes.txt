@@ -7,3 +7,25 @@ uncomment the mail in the account login view
 uncomment the mail in the account registration view
 uncomment the mail in the account forgotpassword view
 uncomment the mail in the account resetpassword view
+
+
+ORM Queries - 
+-------------------------------------------------------------------------------------------------------------------
+
+Fetch a single object from the database that matches the given query parameters.
+
+.get() -    If it finds exactly one object matching the query, it returns that object.
+            If no object matches, it raises a "Model.DoesNotExist" exception.
+            If more than one object matches the query, it raises a "Model.MultipleObjectsReturned" exception.
+
+Use Case: Use this when you expect only one record to match, such as fetching a unique user by their username or id.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Fetch all objects that match the given query parameters as a QuerySet (which is iterable).
+
+.filter() -     Returns a QuerySet containing all matching objects.
+                If no objects match, it returns an empty QuerySet (instead of raising an error)
+
+Use Case: Use filter when you expect multiple records to match or want to handle cases where there might be no matching
+records gracefully

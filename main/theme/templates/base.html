@@ -81,9 +81,6 @@
 							<li>Orders</li><i class="ri-shopping-cart-line"></i>
 						</a>
 						<a href="" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
-							<li>Addresses</li><i class="ri-home-2-line"></i>
-						</a>
-						<a href="" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
 							<li>History</li><i class="ri-history-line"></i>
 						</a>
 						<a href="{% url 'logout' %}" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
@@ -106,9 +103,13 @@
 							</i>
 						{% endif %}
 					</li>
+					<li class="cursor-pointer hover:font-bold"><a href="{% url 'profile' %}">Profile</a></li>
 					<li class="cursor-pointer hover:font-bold"><a href="{% url 'all_product' %}">Products</a></li>
 					<li class="cursor-pointer hover:font-bold">Contact</li>
 					<li class="cursor-pointer hover:font-bold">About us</li>
+					<li class="cursor-pointer hover:font-bold">Orders</li>
+					<li class="cursor-pointer hover:font-bold">History</li>
+					
 				</ul>
 			</div>
 		</nav>

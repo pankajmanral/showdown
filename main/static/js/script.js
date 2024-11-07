@@ -61,3 +61,25 @@ document.addEventListener("click", (event) => {
         usermenu.classList.add("opacity-0");
     }
 });
+
+
+// Address Dropdown
+
+const editAddress = document.querySelectorAll(".editAddress")
+const addressDropdown = document.querySelector("#addressDropdown")
+const addressForm = document.querySelector("#addressForm")
+
+editAddress.forEach((button)=>{
+    button.addEventListener("click",(event)=>{
+
+        console.log('Clicked')
+
+        event.preventDefault()
+
+        addressDropdown.classList.remove("-translate-y-full")
+        addressDropdown.classList.add("translate-y-0")
+
+        addressForm.classList.remove("flex")
+        addressForm.classList.add("hidden")
+    })
+})
