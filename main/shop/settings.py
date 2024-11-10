@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     # other Django apps
     'tailwind',
     'theme',
@@ -47,7 +46,9 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'account',
     'checkout',
-    'userprofile'
+    'userprofile',
+    'order',
+    'payment'
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -167,8 +168,15 @@ LOGIN_URL = '/account/login/'
 
 from decouple import config
 
+# for email processing (SMTP - Simple Mail Transfer Protocol)
+
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = int(config('EMAIL_PORT'))
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+
+# razorpay api key and secret 
+
+RAZORPAY_KEY_ID = config('razor_key_id')
+RAZORPAY_KEY_SECRET  = config('razor_key_secret')

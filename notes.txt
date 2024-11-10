@@ -9,6 +9,42 @@ uncomment the mail in the account forgotpassword view
 uncomment the mail in the account resetpassword view
 
 
+-------------------------------------------------------------------------------------------------------------------
+Login logout module
+
+Register a new user - 
+    get() - 
+        create a form 
+        pass the form to the user
+
+    post() - 
+        get the filled form by the user using FormName(request.POST)
+        check if the form is_valid() 
+        if the form is valid collect the data and save the user 
+        before creting a new user check that the username or the email should not be already existing in the user table if found redirect the user to the login page
+        login(request,user)
+
+Login a existing user - 
+    get() - 
+        give the user the form to enter the username and password 
+
+    post() - 
+        get the entered data from the user's form 
+        and authenticate using django's 
+            authenticate(request,username = username, password = password)
+        if authenticated correctly login(request,user)
+
+-------------------------------------------------------------------------------------------------------------------
+Forget - Password module
+
+get() - 
+    give the user a form to enter the username and email
+
+post() - 
+    get the user entered data 
+    check the esitance for the username AND email in the User model
+    if found generate a otp and store the otp and username in the session
+
 ORM Queries - 
 -------------------------------------------------------------------------------------------------------------------
 

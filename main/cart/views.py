@@ -17,7 +17,6 @@ from .models import Cart
     
 @login_required
 def add_to_cart(request,id):
-
     user = request.user
     user = get_object_or_404(User,username=user)
     product = get_object_or_404(Product,id=id)

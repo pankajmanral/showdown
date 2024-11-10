@@ -72,28 +72,35 @@
             <input type="submit" value="Save Address" class=" mt-2 bg-black text-white px-3 py-1 rounded-md h-12 w-32 sm:w-1/4 cursor-pointer focus:ouline-none focus:border-black">
         </form>
     </div>
-    <div class="px-7 py-2 mt-5 lg:w-1/4 lg:pb-14 h-[36rem] relative sm:fixed right-0 overflow-y-scroll border-l">
-        <h1 class="font-bold mb-5">Saved Addresses</h1>
-        <div class="flex flex-wrap justify-start gap-5">
-            {% for i in detail %}
-            <div class="w-full lg:w-[21rem] rounded-2xl">
-                <div class="">
-                    <h1 class="font-bold rounded-t-2xl p-2">{{ i.title }}</h1>
-                    <hr>
-                    <p class="px-2">{{ i.block_number }} - {{ i.building }}</p>
-                    <p class="px-2">{{ i.street }}, {{ i.land_mark }}</p>
-                    <p class="px-2">{{ i.area }}, {{ i.city }}</p>
-                    <p class="px-2">{{ i.pincode }}</p>
-                    <p class="px-2">{{ i.state }}</p>
+    {% if detail %}
+        <div class="px-7 py-2 mt-5 lg:w-1/4 lg:pb-14 lg:h-[36rem] relative sm:fixed right-0 overflow-y-scroll border-l">
+            <h1 class="font-bold mb-5">Saved Addresses</h1>
+            <div class="flex flex-wrap justify-start gap-5">
+                {% for i in detail %}
+                <div class="w-full lg:w-[21rem] rounded-2xl">
+                    <div class="">
+                        <h1 class="font-bold rounded-t-2xl p-2">{{ i.title }}</h1>
+                        <hr>
+                        <p class="px-2">{{ i.block_number }} - {{ i.building }}</p>
+                        <p class="px-2">{{ i.street }}, {{ i.land_mark }}</p>
+                        <p class="px-2">{{ i.area }}, {{ i.city }}</p>
+                        <p class="px-2">{{ i.pincode }}</p>
+                        <p class="px-2">{{ i.state }}</p>
+                    </div>
+                    <div class="flex justify-between gap-2 mt-2 rounded-b-2xl p-2">
+                        <a id="" href="{% url 'editAddress' i.id %}"><button class="border border-black px-5 rounded-lg"><i class="ri-edit-box-line"></i></button></a>
+                        <a href="{% url 'deleteAddress' i.id %}"><button class="border border-black px-5 rounded-lg"><i class="ri-delete-bin-5-line"></i></button></a>
+                    </div>
                 </div>
-                <div class="flex justify-between gap-2 mt-2 rounded-b-2xl p-2">
-                    <a id="" href="{% url 'editAddress' i.id %}"><button class="border border-black px-5 rounded-lg"><i class="ri-edit-box-line"></i></button></a>
-                    <a href="{% url 'deleteAddress' i.id %}"><button class="border border-black px-5 rounded-lg"><i class="ri-delete-bin-5-line"></i></button></a>
-                </div>
+            {% endfor %}
             </div>
-        {% endfor %}
         </div>
-    </div>
+    {% else %}
+        <div class="px-7 py-2 mt-5 lg:w-1/4 lg:pb-14 lg:h-[36rem] lg:flex justify-center items-center underline sm:fixed right-0 overflow-y-scroll border-l">
+            <p class="text-center">No saved Addresses</p>
+        </div>
+    {% endif %}
+    
 </div>
 
 {% endblock %}

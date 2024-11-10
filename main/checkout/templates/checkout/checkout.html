@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load checkouttotal %}
-
 {% block navbar %} {% endblock %}
-
-{% block content %} 
+{% block content %}
 
     <div class="flex justify-between px-5 sm:px-28 h-20 items-center ">
         <h1 class="font-bold text-2xl">CheckOut</h1>
@@ -16,7 +14,7 @@
     <div class="relative block lg:hidden">
         <div id="summary" class="h-16 flex justify-between items-center bg-[#F5F5F5] px-5 sm:px-28 cursor-pointer">
             <h1 class="text-xs" id="summaryText">Open summary</h1>
-            <h1 class="font-bold">RS 9999</h1>
+            <h1 class="font-bold">RS {{ data|checkoutTotal }}</h1>
         </div>
         <div id="summaryTable" class="mt-2 flex flex-col gap-3 px-5 sm:px-28">
             {% for i in data %}
@@ -35,7 +33,7 @@
             <div class="flex justify-between">
                 <div class="flex items-center">
                     <h1 class="text-sm">Subtotal -</h1>
-                    <h1 class="text-sm ms-1">{ count }</h1>
+                    <h1 class="text-sm ms-1">{{ cartCount }}</h1>
                 </div>
                 <div>
                     <h1 class="text-sm"> {{ data|totalPrice }} </h1>
@@ -58,12 +56,17 @@
                 </div>
             </div>
         </div>
-        <div id="green" class="absolute bg-white top-16 h-screen w-full transition-top transition-all duration-500 ease-in-out">
+        <div id="green" class="absolute bg-white h-svh top-16 w-full transition-top transition-all duration-500 ease-in-out">
 
             <div class="mt-3 px-5 flex flex-col gap-5">
                 <h1 class="text-xl font-bold sm:px-20">Delivery</h1>
                 <h1>Delivery to - <span class="font-bold">{{ request.user }}</span></h1>
-                <p class="">Select an address for delivery</p>
+                {% if displayAddress %}
+
+                {% else %}
+                    <p>Add an Address</p>
+                {% endif %}
+
                 {% if displayAddress %}
                     {% for address in displayAddress %}
                     <div class="flex flex-col">
@@ -84,9 +87,12 @@
                 {% else %}
                     <a href="{% url 'profile' %}"><button class="bg-black text-white px-2 py-1 rounded-md h-12 w-1/2 cursor-pointer focus:ouline-none focus:border-black">Add a Address</button></a>
                 {% endif %}
-                <div class="flex justify-end px-2">
-                    <a href=""><button class="bg-black text-white px-2 py-1 rounded-md h-12 w-44 cursor-pointer focus:ouline-none focus:border-black relative">Proced to payment</button></a>
-                </div>
+
+                {% if displayAddress %}
+                    <div class="flex justify-end px-2">
+                        <button id="rzp-button1" class="bg-black text-white px-2 py-1 rounded-md h-12 w-44 cursor-pointer focus:ouline-none focus:border-black relative">Proced to payment</button>
+                    </div>
+                {% endif %}
             </div>
 
         </div>  
@@ -96,7 +102,11 @@
     <div class="hidden w-full lg:flex">
         <div class="w-1/2 ps-28 py-5 flex flex-col gap-5">
             <h1>Delivery to - <span class="font-bold">{{ request.user }}</span></h1>
-            <p class="my-3">Select an address for delivery</p>
+            {% if displayAddress %}
+
+            {% else %}
+                <p>Add an Address</p>
+            {% endif %}
             {% if displayAddress %}
                 {% for address in displayAddress %}
                 <div class="flex flex-col">
@@ -118,7 +128,7 @@
                 <a href="{% url 'profile' %}"><button class="bg-black text-white px-2 py-1 rounded-md h-12 w-44 cursor-pointer focus:ouline-none focus:border-black">Add a Address</button></a>
             {% endif %}
             <div class="flex justify-end px-5">
-                <a href=""><button class="bg-black text-white px-2 py-1 rounded-md h-12 w-44 cursor-pointer focus:ouline-none focus:border-black">Proced to payment</button></a>
+                <button id="rzp-button-laptop" class="bg-black text-white px-2 py-1 rounded-md h-12 w-44 cursor-pointer focus:ouline-none focus:border-black">Proced to payment</button>
             </div>
         </div>
         <div class="bg-[#F5F5F5] w-1/2 h-[89vh] pe-28">
@@ -169,9 +179,7 @@
         </div>
     </div>
 
-
     <script>
-
         const summary = document.querySelector("#summary")
         const green = document.querySelector("#green")
         const name = document.querySelector("#name")
@@ -195,49 +203,64 @@
             }
             isOpen = !isOpen
         })
+    </script>
+    
+    <!-- js code for razorpay  -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+    
+    document.getElementById("rzp-button1").onclick = function(e){
+        fetch("{% url 'procedToPay' %}")
+        .then((response) => response.json())
+        .then((data) =>{
+            // console.log(data.payment);
+            
+            var options = {
+                "key": data.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
+                "amount": data.payment.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": data.payment.currency,
+                "name": "Acme Corp",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": data.payment.order_id,
+                "callback_url": "",
+                "theme": { "color": "#3399cc" }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
 
+    document.getElementById("rzp-button-laptop").onclick = function(e){
+        fetch("{% url 'procedToPay' %}")
+        .then((response) => response.json())
+        .then((data) =>{
+            // console.log(data.payment);
+            
+            var options = {
+                "key": data.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
+                "amount": data.payment.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": data.payment.currency,
+                "name": "Acme Corp",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": data.payment.order_id,
+                "callback_url": "",
+                "theme": { "color": "#3399cc" }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+    
     </script>
 
-
 {% endblock %}
-
-                    <div class="h-full w-full grid grid-cols-2 grid-rows-5">
-                        <div class="col-span-2">
-                            <label for="" class=" w-28 inline-block">Title</label>
-                            <input type="text" class="w-[81%]" name="title" id="">
-                        </div>
-                        <div>
-                            <label for="" class=" w-28 inline-block">Block Number</label>
-                            <input type="text" name="block_number" id="">
-                        </div>
-                        <div class="">
-                            <label for="" class=" w-28 inline-block">Building</label>
-                            <input type="text" name="building" id="">
-                        </div>
-                        <div>
-                            <label for="" class=" w-28 inline-block">Street</label>
-                            <input type="text" name="street" id="">
-                        </div>
-                        <div>
-                            <label for="" class=" w-28 inline-block">Land Mark</label>
-                            <input type="text" name="land_mark" id="">
-                        </div>
-                        <div>
-                            <label for="" class=" w-28 inline-block">Area</label>
-                            <input type="text" name="area" id="">
-                        </div>
-                        <div>
-                            <label for="" class=" w-28 inline-block">City</label>
-                            <input type="text" name="city" id="">
-                        </div>
-                        <div class="col-span-2">
-                            <label for="" class=" w-28 inline-block">State</label>
-                            <select name="state"  class="w-[30%]" id="state">
-                                <option value="" class="">Select a state</option>
-                                {% for state_code, state_name in form.fields.state.choices %}
-                                    <option value="{{ state_code }}">{{ state_name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                </div> -->

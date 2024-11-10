@@ -14,8 +14,9 @@ class Checkout(View):
         customer = get_object_or_404(Customer,user=user)
         customerAddress = Address.objects.filter(user = customer)
         cartProduct = Cart.objects.filter(user = user)
+        cart_item = cartProduct.count()
         addressForm = AddressForm()
-        return render(request,'checkout/checkout.html',{'address':addressForm,'data':cartProduct,'displayAddress':customerAddress})
+        return render(request,'checkout/checkout.html',{'address':addressForm,'data':cartProduct,'displayAddress':customerAddress,'cartCount':cart_item})
     
     def post(self,request):
         addressForm = AddressForm(request.POST)

@@ -26,7 +26,8 @@ urlpatterns = [
     path('checkout/',include('checkout.urls')),
     path('account/',include('account.urls')),
     path('userprofile/',include('userprofile.urls')),
-    path('theme/',include('theme.urls'))
+    path('theme/',include('theme.urls')),
+    path('payment/',include('payment.urls'))
 ]
 
 from django.conf import settings

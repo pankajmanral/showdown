@@ -23,28 +23,33 @@ class Registration(View):
         customerForm = CustomerRegistrationForm(request.POST)
 
         if userForm.is_valid() and customerForm.is_valid():
+                username =  userForm.cleaned_data['username']
+                email = userForm.cleaned_data['email']
+                
+                if User.objects.filter(username = username).exists() or User.objects.filter(email = email).exists():
+                    return redirect('login')
+                else:
+                    user = User.objects.create_user(
+                        username = username,
+                        first_name = userForm.cleaned_data['first_name'],
+                        last_name = userForm.cleaned_data['last_name'],
+                        email = email,
+                        password = userForm.cleaned_data['password']
+                    )
+                    
+                    customer = customerForm.save(commit = False)
+                    customer.user = user
+                    customer.save()
+                    login(request,user)
 
-            user = User.objects.create_user(
-                username =  userForm.cleaned_data['username'],
-                first_name = userForm.cleaned_data['first_name'],
-                last_name = userForm.cleaned_data['last_name'],
-                email = userForm.cleaned_data['email'],
-                password = userForm.cleaned_data['password']
-            )
-            
-            customer = customerForm.save(commit = False)
-            customer.user = user
-            customer.save()
-            login(request,user)
-
-            # send_mail(
-            #     subject = "From ClothHand",
-            #     message = f"Welcome {user.username}",
-            #     from_email = settings.EMAIL_HOST_USER,
-            #     recipient_list = [user.email],
-            #     fail_silently = False
-            # )
-            return redirect('index')
+                    # send_mail(
+                    #     subject = "From ClothHand",
+                    #     message = f"Welcome {user.username}",
+                    #     from_email = settings.EMAIL_HOST_USER,
+                    #     recipient_list = [user.email],
+                    #     fail_silently = False
+                    # )
+                    return redirect('index')
         
         context = {
             'user' : userForm,
@@ -92,9 +97,11 @@ class ForgotPassword(View):
     
     def post(self,request): 
         username = request.POST.get('username')
-        user = get_object_or_404(User,username = username)
+        # user = get_object_or_404(User,username = username)
         email = request.POST.get('email')
-        if email == user.email:
+
+        if User.objects.filter(username = username) or User.objects.filter(email = email):
+        # if email == user.email:
             otp = random.randint(1000,9999)
             # send_mail(
             #     subject = "OTP for Reset Password",
@@ -106,7 +113,7 @@ class ForgotPassword(View):
 
             print('\n\n\n\n\n',otp,'\n\n\n\n')
             request.session['otp'] = int(otp)
-            request.session['username'] = user.username
+            request.session['username'] = username
             context = {
                 'form' : OTPForm(),
                 'form_action' : '/account/verify-otp/',
