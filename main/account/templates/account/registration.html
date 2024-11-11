@@ -15,6 +15,7 @@
 
             <form method="POST" action="" class="w-full flex flex-wrap items-center justify-center gap-3 px-7 py-3">
                 {% csrf_token %}
+                {{ user.errors }}
                 <input type="text" name="first_name" id="" required placeholder="Enter First name" class="h-12 w-72 rounded-md cursor-pointer">
                 <input type="text" name="last_name" id="" required placeholder="Enter last name" class="h-12 w-72 rounded-md cursor-pointer">
                 <input type="text" name="username" id="" required placeholder="Enter Username" class="h-12 w-72 rounded-md cursor-pointer">

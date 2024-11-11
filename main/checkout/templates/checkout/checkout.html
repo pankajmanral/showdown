@@ -213,17 +213,15 @@
         fetch("{% url 'procedToPay' %}")
         .then((response) => response.json())
         .then((data) =>{
-            // console.log(data.payment);
-            
             var options = {
                 "key": data.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
                 "amount": data.payment.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                 "currency": data.payment.currency,
-                "name": "Acme Corp",
+                "name": "Pankaj Manral",
                 "description": "Test Transaction",
                 "image": "https://example.com/your_logo",
-                "order_id": data.payment.order_id,
-                "callback_url": "",
+                "order_id": data.payment['id'],
+                "callback_url": "http://127.0.0.1:8000/payment/verify_payment/",
                 "theme": { "color": "#3399cc" }
             };
             var rzp1 = new Razorpay(options);
@@ -239,17 +237,15 @@
         fetch("{% url 'procedToPay' %}")
         .then((response) => response.json())
         .then((data) =>{
-            // console.log(data.payment);
-            
             var options = {
                 "key": data.RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
                 "amount": data.payment.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                 "currency": data.payment.currency,
-                "name": "Acme Corp",
+                "name": "Pankaj Manral",
                 "description": "Test Transaction",
                 "image": "https://example.com/your_logo",
-                "order_id": data.payment.order_id,
-                "callback_url": "",
+                "order_id": data.payment['id'],
+                "callback_url": "http://127.0.0.1:8000/payment/verify_payment/",
                 "theme": { "color": "#3399cc" }
             };
             var rzp1 = new Razorpay(options);

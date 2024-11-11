@@ -14,7 +14,7 @@ class Customer(models.Model):
     dob = models.DateField(default=None)
 
     def __str__(self):
-        return f'{self.user.username}'
+        return f'{self.user.username} | Customer User Id - {self.user.id}'
 
 STATE_CHOICES = [
     ('AP', 'Andhra Pradesh'),

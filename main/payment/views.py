@@ -52,11 +52,12 @@ def procedToPay(request):
         data = {"amount" : amount , "currency" : "INR" , "receipt" : str(order.order_uuid)}
         # print(type(data['amount']))
         payment = client.order.create(data=data)
+        # print(payment)
         
         context = {
             'RAZORPAY_KEY_ID' : settings.RAZORPAY_KEY_ID,
             'payment' : payment,
-            'call_back' : ''
+            'call_back' : '/payment/verify_payment/'
         }
 
         Payment.objects.create(
@@ -74,3 +75,42 @@ def procedToPay(request):
     except Exception as e:
         return redirect('index')    
         
+from order.models import OrderDetails
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def verifyPayment(request):
+    try:
+        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID,settings.RAZORPAY_KEY_SECRET))
+        # print(client) - Done
+
+        client.utility.verify_payment_signature({
+            'razorpay_order_id': request.POST.get('razorpay_order_id'),
+            'razorpay_payment_id': request.POST.get('razorpay_payment_id'),
+            'razorpay_signature': request.POST.get('razorpay_signature')
+        })
+        payment_obj = Payment.objects.get(razorpay_orderId = str(request.POST.get('razorpay_order_id')))
+        order = payment_obj.order
+        payment_obj.razorpay_paymentId = str(request.POST.get('razorpay_payment_id'))
+        payment_obj.payment_signature = str(request.POST.get('razorpay_signature'))
+        payment_obj.status = "COMPLETED"
+        payment_obj.save()
+
+        cart = Cart.objects.filter(user = payment_obj.user)
+        print(cart)
+
+        print('top')
+        for item in cart:
+            OrderDetails.objects.create(
+                order = order,
+                product = item.cart_product,
+                quantity = item.quantity,
+                price = item.cart_product.product_price
+            )
+        print('bottom')
+        cart.delete()
+
+        # Change the redirect 
+        return redirect('index')    
+    except Exception as e:
+        return redirect('cart')

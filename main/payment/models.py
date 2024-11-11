@@ -18,9 +18,9 @@ METHOD_CHOICE =[
 
 class Payment(models.Model):
     user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
-    razorpay_orderId = models.CharField(max_length=25,blank=True,default='default')
-    razorpay_paymentId = models.CharField(max_length=25,blank=True,default='default')
-    payment_signature = models.CharField(max_length=128,blank=True,default='default')
+    razorpay_orderId = models.CharField(max_length=25,blank=True)
+    razorpay_paymentId = models.CharField(max_length=25,blank=True)
+    payment_signature = models.CharField(max_length=128,blank=True)
     amount = models.DecimalField(decimal_places=2,max_digits=12)
     status = models.CharField(choices=STATUS_CHOICE,max_length=20)
     method = models.CharField(choices=METHOD_CHOICE,max_length=20)

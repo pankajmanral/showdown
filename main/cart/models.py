@@ -15,7 +15,6 @@ class Cart(models.Model):
         unique_together = [['user','cart_product']]
         db_table = 'Cart'
 
-
     def __str__(self):
         return f'{self.user} | {self.cart_product.product_name} | {self.quantity}'
     
