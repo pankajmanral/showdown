@@ -813,10 +813,6 @@ select {
   grid-column: span 1 / span 1;
 }
 
-.col-span-2 {
-  grid-column: span 2 / span 2;
-}
-
 .row-span-2 {
   grid-row: span 2 / span 2;
 }
@@ -898,10 +894,6 @@ select {
 
 .block {
   display: block;
-}
-
-.inline-block {
-  display: inline-block;
 }
 
 .flex {
@@ -1016,10 +1008,6 @@ select {
   width: 6rem;
 }
 
-.w-28 {
-  width: 7rem;
-}
-
 .w-32 {
   width: 8rem;
 }
@@ -1044,20 +1032,12 @@ select {
   width: 20rem;
 }
 
-.w-\[30\%\] {
-  width: 30%;
-}
-
 .w-\[35rem\] {
   width: 35rem;
 }
 
 .w-\[80\%\] {
   width: 80%;
-}
-
-.w-\[81\%\] {
-  width: 81%;
 }
 
 .w-fit {
@@ -1118,10 +1098,6 @@ select {
 
 .grid-rows-3 {
   grid-template-rows: repeat(3, minmax(0, 1fr));
-}
-
-.grid-rows-5 {
-  grid-template-rows: repeat(5, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -1663,6 +1639,10 @@ select {
 }
 
 @media (min-width: 768px) {
+  .md\:fixed {
+    position: fixed;
+  }
+
   .md\:my-0 {
     margin-top: 0px;
     margin-bottom: 0px;
@@ -1670,10 +1650,6 @@ select {
 
   .md\:block {
     display: block;
-  }
-
-  .md\:flex {
-    display: flex;
   }
 
   .md\:h-\[36rem\] {
@@ -1713,12 +1689,12 @@ select {
 }
 
 @media (min-width: 1024px) {
-  .lg\:ms-5 {
-    margin-inline-start: 1.25rem;
+  .lg\:fixed {
+    position: fixed;
   }
 
-  .lg\:block {
-    display: block;
+  .lg\:ms-5 {
+    margin-inline-start: 1.25rem;
   }
 
   .lg\:flex {

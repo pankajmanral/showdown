@@ -6,11 +6,11 @@ SELECT
     o.order_uuid,
     o.order_on,
     o.status AS order_status,
+    o.order_time as order_time,
     od.quantity AS product_quantity,
     od.price AS product_price,
     p.product_name,
     p.product_description,
-    p.product_image,
     u.first_name,
     u.last_name,
     a.title AS address_title,
@@ -35,7 +35,7 @@ JOIN
 JOIN
     `account_address` a ON o.shipping_address_id = a.id  -- Join Address to get address details
 WHERE
-    c.user_id = 15
+    c.user_id = cust_id
 ORDER BY
     o.order_on DESC;
 
@@ -75,6 +75,6 @@ JOIN
     `account_address` a ON o.shipping_address_id = a.id
 WHERE
     c.user_id = 15
-    AND o.order_on = '2024-11-11'
+    AND o.order_on = '2024-12-11'
 ORDER BY
     o.order_on DESC

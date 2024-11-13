@@ -8,6 +8,7 @@ from payment.models import Payment
 from json import dumps
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from django.utils import timezone
 # Create your views here.
 
 def procedToPay(request):
@@ -31,17 +32,16 @@ def procedToPay(request):
 
         # fetch the customer and the address 
         customer = get_object_or_404(Customer, user = user)
-        address = Address.objects.filter(user = customer).first()
+        address = Address.objects.filter(user = customer).filter(is_selected=True)[0]
 
         # check if the order is already created or create a new
-        order = Order.objects.filter(user = user)
-        if order.exists():
-            order = order[0]
-        else:
+        order = Order.objects.filter(user = user).filter(status__icontains='CREATED').first()
+        if not order:
             order = Order.objects.create(
                 user = user,
                 customer = customer,
                 status = "CREATED",
+                order_time = timezone.now().time(),
                 total = amount,
                 shipping_address = address,
             )
@@ -73,6 +73,7 @@ def procedToPay(request):
         return JsonResponse(context)
 
     except Exception as e:
+        print(e)
         return redirect('index')    
         
 from order.models import OrderDetails
@@ -81,6 +82,12 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def verifyPayment(request):
     try:
+
+        user = request.user 
+        user = get_object_or_404(User,username = user)
+        customer = get_object_or_404(Customer, user = user)
+
+
         client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID,settings.RAZORPAY_KEY_SECRET))
         # print(client) - Done
 
@@ -94,6 +101,9 @@ def verifyPayment(request):
         payment_obj.razorpay_paymentId = str(request.POST.get('razorpay_payment_id'))
         payment_obj.payment_signature = str(request.POST.get('razorpay_signature'))
         payment_obj.status = "COMPLETED"
+        order_obj = get_object_or_404(Order,order_uuid = order.order_uuid) 
+        order_obj.status = "COMPLETED"
+        order_obj.save()
         payment_obj.save()
 
         cart = Cart.objects.filter(user = payment_obj.user)
@@ -104,6 +114,7 @@ def verifyPayment(request):
             OrderDetails.objects.create(
                 order = order,
                 product = item.cart_product,
+                customer = customer,
                 quantity = item.quantity,
                 price = item.cart_product.product_price
             )

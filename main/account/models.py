@@ -66,6 +66,7 @@ class Address(models.Model):
     city = models.CharField(max_length=30)
     pincode = models.PositiveIntegerField(default=666666,blank=True)
     state = models.CharField(max_length=2,choices=STATE_CHOICES)
+    is_selected = models.BooleanField(default=False) 
 
     def __str__(self):
-        return f'{self.user} | {self.title}'
+        return f'{self.user} | {self.title} '

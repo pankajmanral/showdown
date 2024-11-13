@@ -65,9 +65,6 @@
 					{% if request.user.is_authenticated %}
 						<a href="{% url 'cart' %}"><li class="cursor-pointer text-xl hover:font-bold"><i class="ri-handbag-line"></i></li></a>
 						<p id="user" class="hidden lg:flex lg:items-center text-center lg:hover:font-bold cursor-pointer ms-5">Hello {{ request.user }}</p>
-						<!-- <div class="h-10 w-16 border border-black">
-							<img src="{{ data.profilePhoto.url }}" alt="">	
-						</div>	 -->
 					{% else %}
 						<a href="{% url 'login' %}"><li class="cursor-pointer text-xl block hover:font-bold"><i class="ri-user-line"></i></li></a>
 					{% endif %}
@@ -77,7 +74,7 @@
 						<a href="{% url 'profile' %}" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
 							<li>Profile</li><i class="ri-user-line"></i>
 						</a>
-						<a href="" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
+						<a href="{% url 'orders' %}" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
 							<li>Orders</li><i class="ri-shopping-cart-line"></i>
 						</a>
 						<a href="" class="flex w-full justify-between hover:font-bold scale-95 hover:scale-100">
@@ -107,7 +104,7 @@
 					<li class="cursor-pointer hover:font-bold"><a href="{% url 'all_product' %}">Products</a></li>
 					<li class="cursor-pointer hover:font-bold">Contact</li>
 					<li class="cursor-pointer hover:font-bold">About us</li>
-					<li class="cursor-pointer hover:font-bold">Orders</li>
+					<a href="{% url 'orders' %}"><li class="cursor-pointer hover:font-bold">Orders</li></a>
 					<li class="cursor-pointer hover:font-bold">History</li>
 					
 				</ul>

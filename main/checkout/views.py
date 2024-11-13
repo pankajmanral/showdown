@@ -39,4 +39,17 @@ class Checkout(View):
             address.save()
 
             # change the redirect 
-            return redirect('index')
+            return redirect('profile')
+
+def select_address(request,id):
+    selected_address = get_object_or_404(Address,id=id,user=request.user.customer)
+    print(id)
+    Address.objects.filter(user=request.user.customer, is_selected=True).update(is_selected=False)
+
+    # Set the selected address to is_selected=True
+    selected_address.is_selected = True
+    selected_address.save()
+
+    # Print the selected address (for debugging purposes)
+    print(selected_address)
+    return redirect('checkout')

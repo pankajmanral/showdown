@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block content %}
+<div id="summaryTable" class="mt-2 flex flex-col gap-3 px-5 sm:px-28">
+    <!-- {% for i in data %} -->
+    <div class="flex justify-between gap-2 mb-3">
+        <div class="h-[3.8rem] border  rounded-lg w-16 flex justify-center bg-[#F5F5F5]">
+            <img class="h-full w-[80%] border border-black" src="" alt="">
+        </div>
+        <div class="mt-2 w-60">
+            <h1 class="text-sm">Pankaj  x  <span class="font-bold">Quantity</span></h1>
+        </div>
+        <div class="mt-2 w-10 flex justify-end">
+            <h1 class="text-sm">Cost</h1>
+        </div>
+    </div>
+    <!-- {% endfor %} -->
+    <div class="flex justify-between">
+        <div class="flex items-center">
+            <h1 class="text-sm">Subtotal -</h1>
+            <h1 class="text-sm ms-1">{{ order.order_on }}</h1>
+        </div>
+        <div>
+            <h1 class="text-sm"> {{ totalPrice }} </h1>
+        </div>
+    </div>
+    <div class="flex justify-between">
+        <div class="flex items-center">
+            <h1 class="text-sm">Estimated taxes</h1>
+        </div>
+        <div>
+            <h1 class="text-sm">100</h1>
+        </div>
+    </div>
+    <div class="flex justify-between">
+        <div class="flex items-center">
+            <h1 class="text-md font-bold">Total</h1>
+        </div>
+        <div>
+            <h1 class="text-md font-bold">{{ checkoutTotal }}</h1>
+        </div>
+    </div>
+</div>
+{% endblock %}

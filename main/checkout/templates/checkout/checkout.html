@@ -109,7 +109,7 @@
             {% endif %}
             {% if displayAddress %}
                 {% for address in displayAddress %}
-                <div class="flex flex-col">
+                <div class="flex flex-col relative">
                     <p class="font-bold mb-2">{{ address.title }}</p>
                     <div class="flex gap-5">
                         <p>{{ address.block_number }} , {{ address.building }}</p>
@@ -122,6 +122,15 @@
                     </div>
                     <p>{{ address.state }}</p>
                 </div>
+                {% if address.is_selected == "True" %}
+                    <div class="flex justify-end px-5">
+                        <a href="{% url 'select_address' address.id %}"><button class="w-32 border bg-black text-white">SELECT</button></a>
+                    </div>
+                {% else %}
+                    <div class="flex justify-end px-5">
+                        <a href="{% url 'select_address' address.id %}"><button class="w-32 border bg-white text-black">SELECT</button></a>
+                    </div>
+                {% endif %}
                 <hr class="w-[80%]">
                 {% endfor %}
             {% else %}

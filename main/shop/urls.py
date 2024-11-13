@@ -27,7 +27,8 @@ urlpatterns = [
     path('account/',include('account.urls')),
     path('userprofile/',include('userprofile.urls')),
     path('theme/',include('theme.urls')),
-    path('payment/',include('payment.urls'))
+    path('payment/',include('payment.urls')),
+    path('order/',include('order.urls'))
 ]
 
 from django.conf import settings
