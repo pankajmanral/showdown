@@ -68,3 +68,4 @@ class editAddress(View):
             return redirect('profile')
         else:
             return render(request,'userprofile/user.html',{'addressForm':addressForm})
+        

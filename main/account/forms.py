@@ -44,12 +44,12 @@ class AddressForm(ModelForm):
         }
         
 class ForgetPasswordForm(forms.Form):
-    username = forms.CharField(max_length=20)
-    email = forms.CharField(max_length=30,widget=forms.EmailInput)
+    username = forms.CharField(max_length=20,widget=forms.TextInput(attrs={'placeholder':'Enter username','class':'h-12 w-60 sm:w-80 rounded-md'}))
+    email = forms.CharField(max_length=50,widget=forms.EmailInput(attrs={'placeholder':'Enter email','class':'h-12 w-60 sm:w-80 rounded-md'}))
 
 class OTPForm(forms.Form):
-    otp = forms.IntegerField(max_value=9999,min_value=1000)
+    otp = forms.IntegerField(max_value=9999,min_value=1000,widget=forms.NumberInput(attrs={'placeholder':'Enter 4-digit otp','class':'w-60 sm:w-80 rounded-md'}))
 
 class ResetPasswordForm(forms.Form):
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Enter Password'}))
-    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Confirm Password'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Enter Password','class':'w-60 sm:w-80 rounded-md'}))
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Confirm Password','class':'w-60 sm:w-80 rounded-md'}))

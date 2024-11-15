@@ -78,3 +78,6 @@ WHERE
     AND o.order_on = '2024-12-11'
 ORDER BY
     o.order_on DESC
+
+
+Call FullOrderDetails(cust_id)

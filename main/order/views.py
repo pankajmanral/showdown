@@ -7,17 +7,15 @@ from account.models import Customer,Address
 
 def orders(request):
 
-    #get the user
     user = request.user
-    user = get_object_or_404(User,username = user)  # => manral02
-    customer = get_object_or_404(Customer,user = user)  # => manral02     
-    order = Order.objects.filter(customer = customer)   
 
-    orderdetail = OrderDetails.objects.filter(customer = customer)
-    print('details : ',orderdetail)
+    orders = Order.objects.filter(user = user).filter(status = 'PROCESSING').order_by('order_on').order_by('-order_time')
+    for order in orders:
+        total_amount = sum(od.quantity * od.price for od in order.orderdetails_set.all())  # Calculate total for each order
+        order.total_amount = total_amount + 100
+
     context = {
-        'order' : order ,
-        'orderdetail' : orderdetail
+        'order' : orders,
     }
 
     return render(request,'order/order.html',context)

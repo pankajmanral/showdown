@@ -4,7 +4,7 @@
 {% block navbar %} {% endblock %}
 {% block content %}
 
-    <div class="flex justify-between px-5 sm:px-28 h-20 items-center ">
+    <div class="flex justify-between px-5 sm:px-28 h-20 items-center sticky inset-0 bg-white z-50">
         <h1 class="font-bold text-2xl">CheckOut</h1>
         <a href="{% url 'cart' %}"><i class="ri-handbag-line text-xl"></i></a>
     </div>
@@ -82,18 +82,28 @@
                         </div>
                         <p>{{ address.state }}</p>
                     </div>
-                    <hr class="w-[80%]">
+                    {% if address.is_selected%}
+                        <div class="flex justify-end px-5">
+                            <a href="{% url 'select_address' address.id %}"><button class="px-2 h-8 border rounded-md bg-black text-white">Deliver Here<i class="ri-map-pin-2-line ms-2"></i></button></a>
+                        </div>
+                    {% else %}
+                        <div class="flex justify-end px-5">
+                            <a href="{% url 'select_address' address.id %}"><button class="px-2 h-8 border rounded-md bg-white text-black">Select</button></a>
+                        </div>
+                    {% endif %}
+                    <hr class="w-[100%]">
                     {% endfor %}
                 {% else %}
                     <a href="{% url 'profile' %}"><button class="bg-black text-white px-2 py-1 rounded-md h-12 w-1/2 cursor-pointer focus:ouline-none focus:border-black">Add a Address</button></a>
                 {% endif %}
 
                 {% if displayAddress %}
-                    <div class="flex justify-end px-2">
+                    <div class="flex justify-end px-2 mb-5">
                         <button id="rzp-button1" class="bg-black text-white px-2 py-1 rounded-md h-12 w-44 cursor-pointer focus:ouline-none focus:border-black relative">Proced to payment</button>
                     </div>
                 {% endif %}
             </div>
+            
 
         </div>  
     </div>
@@ -122,25 +132,29 @@
                     </div>
                     <p>{{ address.state }}</p>
                 </div>
-                {% if address.is_selected == "True" %}
+                {% if address.is_selected %}
                     <div class="flex justify-end px-5">
-                        <a href="{% url 'select_address' address.id %}"><button class="w-32 border bg-black text-white">SELECT</button></a>
+                        <a href="{% url 'select_address' address.id %}"><button class="px-2 h-8 border rounded-md bg-black text-white">Deliver Here<i class="ri-map-pin-2-line ms-2"></i></button></a> 
                     </div>
                 {% else %}
                     <div class="flex justify-end px-5">
-                        <a href="{% url 'select_address' address.id %}"><button class="w-32 border bg-white text-black">SELECT</button></a>
+                        <a href="{% url 'select_address' address.id %}"><button class="px-2 h-8 border rounded-md bg-white text-black">Select</button></a>
                     </div>
                 {% endif %}
-                <hr class="w-[80%]">
+                <hr class="w-[95%]">
                 {% endfor %}
             {% else %}
                 <a href="{% url 'profile' %}"><button class="bg-black text-white px-2 py-1 rounded-md h-12 w-44 cursor-pointer focus:ouline-none focus:border-black">Add a Address</button></a>
             {% endif %}
-            <div class="flex justify-end px-5">
-                <button id="rzp-button-laptop" class="bg-black text-white px-2 py-1 rounded-md h-12 w-44 cursor-pointer focus:ouline-none focus:border-black">Proced to payment</button>
-            </div>
+            {% if displayAddress %}
+                <div class="flex justify-center px-5">
+                    <button id="rzp-button-laptop" class="bg-black text-white px-2 py-1 rounded-md h-12 w-44 cursor-pointer focus:ouline-none focus:border-black">Proced to payment</button>
+                </div>
+            {% else %}
+
+            {% endif %}
         </div>
-        <div class="bg-[#F5F5F5] w-1/2 h-[89vh] pe-28">
+        <div class="bg-[#F5F5F5] w-1/2 h-[89vh] pe-28 sticky top-20">
             <div class="w-full">
                 <div class="py-5 ps-5">
                     {% for i in data %}

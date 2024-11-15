@@ -9,6 +9,9 @@ from json import dumps
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.timezone import localtime
+from django.core.mail import send_mail
+
 # Create your views here.
 
 def procedToPay(request):
@@ -16,7 +19,6 @@ def procedToPay(request):
 
         # print(settings.RAZORPAY_KEY_ID)
         # print(settings.RAZORPAY_KEY_SECRET)
-
         # fetch the current user and the user cart 
         user = request.user 
         # print('top')
@@ -41,7 +43,7 @@ def procedToPay(request):
                 user = user,
                 customer = customer,
                 status = "CREATED",
-                order_time = timezone.now().time(),
+                order_time = localtime(timezone.now()).time(),
                 total = amount,
                 shipping_address = address,
             )
@@ -102,14 +104,13 @@ def verifyPayment(request):
         payment_obj.payment_signature = str(request.POST.get('razorpay_signature'))
         payment_obj.status = "COMPLETED"
         order_obj = get_object_or_404(Order,order_uuid = order.order_uuid) 
-        order_obj.status = "COMPLETED"
+        order_obj.status = "PROCESSING"
         order_obj.save()
         payment_obj.save()
 
         cart = Cart.objects.filter(user = payment_obj.user)
         print(cart)
 
-        print('top')
         for item in cart:
             OrderDetails.objects.create(
                 order = order,
@@ -118,10 +119,17 @@ def verifyPayment(request):
                 quantity = item.quantity,
                 price = item.cart_product.product_price
             )
-        print('bottom')
+
+        send_mail(
+            subject = "From ClothHand",
+            message = f"{user.username} your order has been confirmed.",
+            from_email = settings.EMAIL_HOST_USER,
+            recipient_list = [user.email],
+            fail_silently = True
+        )
+        
         cart.delete()
 
-        # Change the redirect 
-        return redirect('index')    
+        return redirect('orders')    
     except Exception as e:
         return redirect('cart')

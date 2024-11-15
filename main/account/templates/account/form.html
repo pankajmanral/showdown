@@ -4,17 +4,24 @@
 
 {% block content %}
 
-    <div class="h-screen w-full flex flex-col gap-10 justify-center items-center">
+    <div class="h-[90vh] sm:h-screen w-full flex flex-col gap-5 justify-center items-center">
         <div>
             <h1 class="font-thin text-3xl underline">Forgot Password</h1>
         </div>
         <form method="POST" action="{{ form_action }}" class="flex flex-col items-center gap-2">
             {% csrf_token %}
             {% if form %}
-                {{ form.as_p }}
+                {{ form.username }}
+                {{ form.email }}
+                {{ form.otp }}
+                {{ form.password }}
+                {{ form.confirm_password }}
             {% else %}
-                <input type="text" name="username" placeholder="Enter username" class="w-72 h-12 rounded-md">
-                <input type="email" name="email" placeholder="Enter email" class="w-72 h-12 rounded-md">
+                {{ form.username }}
+                {{ form.email }}
+                {{ form.otp }}
+                {{ form.password }}
+                {{ form.confirm_password }}
             {% endif %}
             <input type="submit" value="Submit" class="bg-black text-white px-5 py-1 rounded-md h-12 w-1/2 cursor-pointer focus:ouline-none focus:border-black">
         </form>

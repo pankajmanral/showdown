@@ -28,7 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.0.107', '192.168.0.110']
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -137,7 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
