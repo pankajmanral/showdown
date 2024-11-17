@@ -4,9 +4,10 @@ from django.views import View
 from account.forms import AddressForm
 from account.models import Address,Customer
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
-
 class Checkout(View):
     def get(self,request):
         user = request.user
@@ -41,6 +42,7 @@ class Checkout(View):
             # change the redirect 
             return redirect('profile')
 
+@login_required
 def select_address(request,id):
     selected_address = get_object_or_404(Address,id=id,user=request.user.customer)
     print(id)

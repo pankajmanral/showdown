@@ -3,6 +3,7 @@ from django.views import View
 from . forms import UserprofileForm
 from account.models import Customer,Address
 from account.forms import AddressForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -42,6 +43,7 @@ class UserProfile(View):
         else:
             return redirect('index')
 
+@login_required
 def deleteAddress(request,id):
     address = get_object_or_404(Address,id=id)
     address.delete()
