@@ -65,3 +65,6 @@ Fetch all objects that match the given query parameters as a QuerySet (which is 
 
 Use Case: Use filter when you expect multiple records to match or want to handle cases where there might be no matching
 records gracefully
+
+
+python manage.py staticfiles

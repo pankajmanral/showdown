@@ -98,10 +98,10 @@
 						{% endif %}
 					</li>
 					<li class="cursor-pointer hover:font-bold"><a href="{% url 'profile' %}">Profile</a></li>
+					<a href="{% url 'orders' %}"><li class="cursor-pointer hover:font-bold">Orders</li></a>				
 					<li class="cursor-pointer hover:font-bold"><a href="{% url 'all_product' %}">Products</a></li>
 					<li class="cursor-pointer hover:font-bold">Contact</li>
 					<li class="cursor-pointer hover:font-bold">About us</li>
-					<a href="{% url 'orders' %}"><li class="cursor-pointer hover:font-bold">Orders</li></a>				
 				</ul>
 			</div>
 		</nav>
@@ -111,7 +111,7 @@
 		
 		{% block content %} {% endblock %}
 			
-		<script src="{% static 'D:\Pankaj CLG\showdown\main\static\js\script.js' %}"></script>
+		<script src="{% static 'js/script.js' %}"></script>
 
 	</body>
 </html>

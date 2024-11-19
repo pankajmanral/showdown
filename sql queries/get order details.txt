@@ -80,4 +80,4 @@ ORDER BY
     o.order_on DESC
 
 
-Call FullOrderDetails(cust_id)
+call FullOrderDetail(25);

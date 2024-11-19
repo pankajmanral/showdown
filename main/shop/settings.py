@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-xzpvhe8)04*t*5kjo90d4v!=0*81lb842xt!0*9&u&5%e&4tsf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.0.107', '192.168.0.110']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.0.107', '192.168.0.110','192.168.0.113']
 
 
 # Application definition
@@ -156,7 +156,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os 
 
 # to upload static img 
-STATIC_URL = 'static/'
+# static file for deployment server
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR/'static'] 
 
 # to upload images from database 

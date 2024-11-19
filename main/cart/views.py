@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from . models import Cart
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import json
 
 @login_required
 def cart(request):  
@@ -14,25 +15,35 @@ def cart(request):
 
 from product.models import Product
 from .models import Cart
-    
+from django.http import JsonResponse
 @login_required
 def add_to_cart(request,id):
-    user = request.user
-    user = get_object_or_404(User,username=user)
-    product = get_object_or_404(Product,id=id)
+    if request.method == "POST":
 
-    try:
-        obj = Cart.objects.get(user=user,cart_product=product)
-        obj.quantity += 1
-        obj.save()
-    except Cart.DoesNotExist:
-        if 'cart_item_count' not in request.session:
-            request.session['cart_item_count'] = 0
-        request.session['cart_item_count'] += 1
+        data = json.loads(request.body)
+        print(data)
+        quantity = data.get('quantity')
+        print(quantity)
 
-        Cart.objects.create(user=user,cart_product=product,quantity=1)
 
-    return redirect('all_product')
+        user = request.user
+        user = get_object_or_404(User,username=user)
+        product = get_object_or_404(Product,id=id)
+
+        try:
+            obj = Cart.objects.get(user=user,cart_product=product)
+            obj.quantity += quantity
+            obj.save()
+        except Cart.DoesNotExist:
+            if 'cart_item_count' not in request.session:
+                request.session['cart_item_count'] = quantity
+            request.session['cart_item_count'] += 1
+            Cart.objects.create(user=user,cart_product=product,quantity=quantity)
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Product added to cart successfully.'
+        })
 
 @login_required
 def delete_product(request,id):
@@ -44,3 +55,15 @@ def getDetail(request,id):
     details = get_object_or_404(Product,id = id)
     suggestedProduct = Product.objects.filter(tag=details.tag).exclude(id=id)[:4]
     return render(request,'product/product_details.html',{'detail':details,'data':suggestedProduct})
+
+def updateCartQuantity(request,id):
+    cart_item = get_object_or_404(Cart,id=id)
+    print(cart_item)
+    action = request.GET.get('action')
+
+    if action == 'increase':
+        cart_item.quantity += 1
+    elif action == 'decrease' and cart_item.quantity > 1:
+        cart_item.quantity -= 1
+    cart_item.save()
+    return redirect('cart')

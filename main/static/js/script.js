@@ -11,29 +11,47 @@ toggleBtn.addEventListener('click',()=>{
 // cart dropdown 
 
 const cartDropdown = document.querySelector("#cartDropdown")
-const addCartBtn = document.querySelectorAll("#addCartBtn")
 const crossBtn = document.querySelectorAll("#crossBtn")
 
+const addCartBtn = document.querySelectorAll("#addCartBtn")
 addCartBtn.forEach((button) =>{
-    button.addEventListener("click",()=>{
-
+    button.addEventListener("click",function(e){
+        e.preventDefault()
         const productName = button.getAttribute('data-product-name')
         const productImage = button.getAttribute('data-product-img')
-        
+        const prodId = this.dataset.productId
+
+        const csrfToken = document.cookie.split(';')
+            .find(cookie => cookie.trim().startsWith('csrftoken='))
+            ?.split('=')[1];
+
         document.querySelector("#dropdownName").textContent = productName
         document.querySelector("#dropdownImage").src = productImage
+
+        fetch(`/cart/add-to-cart/${prodId}/`,{
+            method : "POST",
+            headers : {
+                'Content-Type' : 'application/json',
+                'X-CSRFToken': csrfToken, 
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            
+        })
         
         cartDropdown.classList.remove("-translate-y-full","opacity-0")
 
         setTimeout(()=>{
             closeFunction()
-        },5000)
+        },3000)
     
     })
 })
 
 const closeFunction = () => {
-    cartDropdown.classList.add("-translate-y-full")
+    cartDropdown.classList.add("-translate-y-full","opacity-0")
 }
 
 crossBtn.forEach((btn) => {

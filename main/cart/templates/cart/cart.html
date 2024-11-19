@@ -44,9 +44,9 @@
                         </div>
                         <div class="hidden sm:flex sm:justify-center sm:items-center sm:gap-5">
                             <div class="border border-black hidden w-32 h-12 text-xl px-3 sm:flex justify-between items-center">
-                                <p class="cursor-pointer">-</p>
+                                <a href="{% url 'updateCartQuantity' i.id %}?action=decrease"><p class="cursor-pointer">-</p></a>
                                 <p>{{ i.quantity }}</p>
-                                <p class="cursor-pointer">+</p>
+                                <a href="{% url 'updateCartQuantity' i.id %}?action=increase"><p class="cursor-pointer">+</p></a>
                             </div>
                             <div>
                                 <form action="{% url 'delete_product' i.id %}" method="POST">
@@ -60,9 +60,9 @@
                         </div>
                         <div class="col-span-1 ms-3 sm:hidden">
                             <div class="border border-black flex justify-between items-center w-32 h-12 text-xl px-3">
-                                <p class="cursor-pointer">-</p>
+                                <a href="{% url 'updateCartQuantity' i.id %}?action=decrease"><p class="cursor-pointer">-</p></a>
                                 <p>{{ i.quantity }}</p>
-                                <p class="cursor-pointer">+</p>
+                                <a href="{% url 'updateCartQuantity' i.id %}?action=increase"><p class="cursor-pointer">+</p></a>
                             </div>
                         </div>
                         <div class="sm:hidden h-12 flex justify-end items-center">
