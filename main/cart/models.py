@@ -10,6 +10,7 @@ class Cart(models.Model):
     cart_product = models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     added_at = models.DateTimeField(auto_now_add=True)
+    
 
     class Meta:
         unique_together = [['user','cart_product']]

@@ -16,8 +16,10 @@ def cart(request):
 from product.models import Product
 from .models import Cart
 from django.http import JsonResponse
+
 @login_required
 def add_to_cart(request,id):
+
     if request.method == "POST":
 
         data = json.loads(request.body)
