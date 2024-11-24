@@ -83,8 +83,8 @@ class Login(View):
         return render(request,'account/login.html')
     
     def post(self,request):
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST.get('username').strip()
+        password = request.POST.get('password').strip()
         user = authenticate(request,username = username,password = password)
         if user : 
             login(request,user)
@@ -110,7 +110,7 @@ class Login(View):
         
 def logout_user(request):
     logout(request)
-    return redirect('login')
+    return redirect('index')
 
 from . forms import ForgetPasswordForm,OTPForm,ResetPasswordForm
 import random
@@ -128,25 +128,26 @@ class ForgotPassword(View):
         email = request.POST.get('email')
 
         if User.objects.filter(username = username) or User.objects.filter(email = email):
-        # if email == user.email:
-            otp = random.randint(1000,9999)
-            # send_mail(
-            #     subject = "OTP for Reset Password",
-            #     message = f'{otp} this is your otp for forgot password request',
-            #     from_email = settings.EMAIL_HOST_USER,
-            #     recipient_list = [user.email],
-            #     fail_silently = True
-            # )
+            if email == user.email:
+                otp = random.randint(1000,9999)
+                send_mail(
+                    subject = "OTP for Reset Password",
+                    message = f'{otp} this is your otp for forgot password request',
+                    from_email = settings.EMAIL_HOST_USER,
+                    recipient_list = [user.email],
+                    fail_silently = True
+                )
 
-            print('\n\n\n\n\n',otp,'\n\n\n\n')
-            request.session['otp'] = int(otp)
-            request.session['username'] = username
-            context = {
-                'form' : OTPForm(),
-                'form_action' : '/account/verify-otp/',
-                'otp' : 'verify-otp'
-            }
-            return render(request,'account/form.html',context)
+                request.session['otp'] = int(otp)
+                request.session['username'] = username
+                context = {
+                    'form' : OTPForm(),
+                    'form_action' : '/account/verify-otp/',
+                    'otp' : 'verify-otp'
+                }
+                return render(request,'account/form.html',context)
+            else:
+                return redirect('login')
         else:
             return redirect('login')
         
@@ -160,10 +161,10 @@ def verifyOTP(request):
             context = {
                 'form' : ResetPasswordForm(),
                 'form_name' : f'Enter new password for {username}',
-                'form_action' : '/account/reset-password/',
-                
+                'form_action' : '/account/reset-password/', 
             }
             return render(request,'account/form.html',context)
+        return redirect('login')
     else:
         return redirect('index')
     

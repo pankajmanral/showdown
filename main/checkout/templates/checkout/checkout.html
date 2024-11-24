@@ -20,7 +20,7 @@
             {% for i in data %}
             <div class="flex justify-between gap-2 mb-3">
                 <div class="h-[3.8rem] border  rounded-lg w-16 flex justify-center bg-[#F5F5F5]">
-                    <img class="h-full w-[80%]" src="{{ i.cart_product.product_image.url }}" alt="">
+                    <a href="{% url 'product_detail' i.cart_product.id %}"><img class="h-full w-[80%]" src="{{ i.cart_product.product_image.url }}" alt=""></a>
                 </div>
                 <div class="mt-2 w-60">
                     <h1 class="text-sm">{{ i.cart_product.product_name }}  x  <span class="font-bold">{{ i.quantity }}</span></h1>
@@ -161,7 +161,7 @@
                     <div class="flex justify-between items-center gap-2 mb-3">
                         <div class="flex items-center gap-3">
                             <div class="h-[3.8rem] border rounded-lg w-16 flex justify-center bg-[#F5F5F5]">
-                                <img class="h-full w-[80%]" src="{{ i.cart_product.product_image.url }}" alt="">
+                                <a href="{% url 'product_detail' i.cart_product.id %}"><img class="h-full w-[80%]" src="{{ i.cart_product.product_image.url }}" alt=""></a>
                             </div>
                             <h1 class="text-sm">{{ i.cart_product.product_name }}  x  <span class="font-bold">{{ i.quantity }}</span></h1>
                         </div>

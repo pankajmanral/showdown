@@ -53,5 +53,4 @@ def select_address(request,id):
     selected_address.save()
 
     # Print the selected address (for debugging purposes)
-    print(selected_address)
     return redirect('checkout')

@@ -15,7 +15,7 @@
             <form method="post" action="" class="w-full flex flex-col items-center justify-center gap-3">
                 {% csrf_token %}
                 <input type="text" name="username" placeholder="Enter username" onfocus="this.placeholder = ''" onblur="this.placeholder='Enter username'" class="h-12 w-72 sm:w-96 rounded-md cursor-pointer focus:ouline-none focus:border-black" id="username">
-                <input type="password" name="password" placeholder="Enter password" onfocus="this.placeholder = ''" onblur="this.placeholder='Enter password'" class="h-12 w-72 sm:w-96 rounded-md cursor-pointer" id="password">
+                <input type="password" name="password" placeholder="Enter password" onfocus="this.placeholder = ''" onblur="this.placeholder='Enter password'" minlength="8" class="h-12 w-72 sm:w-96 rounded-md cursor-pointer" id="password">
                 <input type="submit" value="Submit" class="bg-black text-white px-5 py-1 rounded-md h-12 w-1/2 cursor-pointer focus:ouline-none focus:border-black">
             </form>
             <div class="flex flex-col items-center -mt-5 gap-2">

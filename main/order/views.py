@@ -11,7 +11,7 @@ def orders(request):
 
     user = request.user
 
-    orders = Order.objects.filter(user = user).filter(status = 'PROCESSING').order_by('order_on').order_by('order_time')
+    orders = Order.objects.filter(user = user).filter(status = 'CREATED').order_by('-order_on')
     for order in orders:
         total_amount = sum(od.quantity * od.price for od in order.orderdetails_set.all())  # Calculate total for each order
         order.total_amount = total_amount + 100

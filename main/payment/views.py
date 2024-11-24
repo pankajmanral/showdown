@@ -21,8 +21,7 @@ def procedToPay(request):
         # print(settings.RAZORPAY_KEY_ID)
         # print(settings.RAZORPAY_KEY_SECRET)
         # fetch the current user and the user cart 
-        user = request.user 
-        # print('top')
+        user = request.user
         user = get_object_or_404(User,username = user)
         userCart = Cart.objects.filter(user = user)
 
@@ -71,8 +70,6 @@ def procedToPay(request):
             method = "RAZORPAY",
             order = order
         )
-        # print('bottom')
-        # data = dumps(context,indent=4)
         return JsonResponse(context)
 
     except Exception as e:
@@ -105,7 +102,7 @@ def verifyPayment(request):
         payment_obj.payment_signature = str(request.POST.get('razorpay_signature'))
         payment_obj.status = "COMPLETED"
         order_obj = get_object_or_404(Order,order_uuid = order.order_uuid) 
-        order_obj.status = "PROCESSING"
+        order_obj.status = "CREATED"
         order_obj.save()
         payment_obj.save()
 
@@ -126,6 +123,14 @@ def verifyPayment(request):
             message = f"{user.username} your order has been confirmed.",
             from_email = settings.EMAIL_HOST_USER,
             recipient_list = [user.email],
+            fail_silently = True
+        )
+        
+        send_mail(
+            subject = "New order placed",
+            message = f"A new order has been placed by {user.username}",
+            from_email = settings.EMAIL_HOST_USER,
+            recipient_list = [settings.ADMIN_EMAIL],
             fail_silently = True
         )
         

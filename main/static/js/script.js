@@ -80,6 +80,8 @@ document.addEventListener("click", (event) => {
     }
 });
 
-
 // summary dropdown for smaller devices 
 // add the script file here 
+
+// product_details
+

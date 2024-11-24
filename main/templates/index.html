@@ -63,7 +63,11 @@
                         <p class="quantityCount">1</p>
                         <p class="cursor-pointer increase w-full text-center">+</p>
                     </div>
-                    <button id="addCartBtn" data-product-id="{{ i.id }}" data-product-name = "{{ i.product_name }}" data-product-img="{{ i.product_image.url }}" class="border border-black h-14 w-full mb-4">Add to cart</button>
+                    {% if request.user.is_authenticated %}
+                        <button id="addCartBtn" data-product-id="{{ i.id }}" data-product-name = "{{ i.product_name }}" data-product-img="{{ i.product_image.url }}" class="border border-black h-14 w-full mb-4">Add to cart</button>
+                    {% else %}
+                        <a href="{% url 'add' %}"><button class="border border-black h-14 w-full mb-4">Add to cart</button></a>
+                    {% endif %}
                     <a href="{% url 'product_detail' i.id %}"><button class="border border-black h-14 w-full mb-4 bg-black text-white">View full details</button></a>
                     <div class="flex justify-between">
                         <div class="flex gap-3 cursor-pointer">

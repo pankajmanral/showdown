@@ -19,14 +19,10 @@ from django.http import JsonResponse
 
 @login_required
 def add_to_cart(request,id):
-
     if request.method == "POST":
 
         data = json.loads(request.body)
-        print(data)
         quantity = data.get('quantity')
-        print(quantity)
-
 
         user = request.user
         user = get_object_or_404(User,username=user)
@@ -46,6 +42,10 @@ def add_to_cart(request,id):
             'status': 'success',
             'message': 'Product added to cart successfully.'
         })
+
+@login_required
+def add(request):
+    pass
 
 @login_required
 def delete_product(request,id):

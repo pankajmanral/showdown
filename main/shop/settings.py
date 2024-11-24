@@ -159,7 +159,7 @@ import os
 # static file for deployment server
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR/'static'] 
+# STATICFILES_DIRS = [BASE_DIR/'static'] 
 
 # to upload images from database 
 MEDIA_URL = '/media/'
@@ -181,3 +181,5 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 
 RAZORPAY_KEY_ID = config('razor_key_id')
 RAZORPAY_KEY_SECRET  = config('razor_key_secret')
+
+ADMIN_EMAIL = config('ADMIN_EMAIL')
