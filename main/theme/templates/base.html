@@ -99,8 +99,10 @@
 							</i>
 						{% endif %}
 					</li>
-					<li class="cursor-pointer hover:font-bold"><a href="{% url 'profile' %}">Profile</a></li>
-					<a href="{% url 'orders' %}"><li class="cursor-pointer hover:font-bold">Orders</li></a>				
+					{% if request.user.is_authenticated %}
+						<li class="cursor-pointer hover:font-bold"><a href="{% url 'profile' %}">Profile</a></li>
+						<a href="{% url 'orders' %}"><li class="cursor-pointer hover:font-bold">Orders</li></a>		
+					{% endif %}		
 					<li class="cursor-pointer hover:font-bold"><a href="{% url 'all_product' %}">Products</a></li>
 					<li class="cursor-pointer hover:font-bold">Contact</li>
 					<li class="cursor-pointer hover:font-bold">About us</li>

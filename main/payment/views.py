@@ -102,7 +102,7 @@ def verifyPayment(request):
         payment_obj.payment_signature = str(request.POST.get('razorpay_signature'))
         payment_obj.status = "COMPLETED"
         order_obj = get_object_or_404(Order,order_uuid = order.order_uuid) 
-        order_obj.status = "CREATED"
+        order_obj.status = "PROCESSING"
         order_obj.save()
         payment_obj.save()
 
