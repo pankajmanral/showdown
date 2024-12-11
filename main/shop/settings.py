@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-xzpvhe8)04*t*5kjo90d4v!=0*81lb842xt!0*9&u&5%e&4tsf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.0.107', '192.168.0.110','192.168.0.113']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.0.102', '192.168.0.110','192.168.0.113']
 
 
 # Application definition
@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'checkout',
     'userprofile',
     'order',
-    'payment'
+    'payment',
+    'wishlist'
 ]
 
 TAILWIND_APP_NAME = 'theme'

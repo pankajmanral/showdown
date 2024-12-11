@@ -128,7 +128,7 @@ def verifyPayment(request):
         
         send_mail(
             subject = "New order placed",
-            message = f"A new order has been placed by {user.username}",
+            message = f"A new order has been placed by {user.username} order-UUID - {order_obj.order_uuid}",
             from_email = settings.EMAIL_HOST_USER,
             recipient_list = [settings.ADMIN_EMAIL],
             fail_silently = True

@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %}
+
+    {% for i in wish %}
+    
+        <div>
+            <a href="{% url 'product_detail' i.wishlist_product.id %}"><img src="{{ i.wishlist_product.product_image.url }}" alt=""></a>
+            <h1>{{ i.wishlist_product.product_name }}</h1>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

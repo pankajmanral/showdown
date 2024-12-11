@@ -56,8 +56,12 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, amet. Optio, modi quis quasi nisi, autem minus iusto, inventore quaerat placeat facere tempore! Iure dolor similique recusandae eius iste, repellendus quibusdam maxime ipsa quam aliquid! Eius a incidunt reprehenderit error minus ea aspernatur pariatur itaque molestiae animi delectus molestias in ducimus, inventore officia! Eligendi eos rem aut porro ad architecto.</p>
             <div class="flex justify-between mt-3">
                 <div class="flex gap-3 cursor-pointer">
-                    <i class="ri-upload-2-line"></i>
-                    <p>Share</p>
+                    <a href="{% url 'add_to_wishlist' detail.id %}">
+                        <button class="flex gap-2"> 
+                            <i class="ri-heart-2-line"></i>
+                            <p>Add to wishlist</p>
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
